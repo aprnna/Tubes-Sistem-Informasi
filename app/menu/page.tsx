@@ -10,8 +10,6 @@ export default function AboutPage() {
   async function getMenu() {
     const {data} = await fetchApi("/menu","GET");
 
-    console.log(data);
-
     return setMenu(data);
   }
 
