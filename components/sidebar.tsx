@@ -17,7 +17,7 @@ const Sidebar = () => {
   return (
     <div className={`flex flex-col h-screen p-3 bg-white ${isExpanded ? 'w-64' : 'w-20'} transition-all duration-300 shadow-2xl`}>
       <button
-        className="mb-5 text-amber-950 hover:bg-orange-100 transition-all duration-300 p-3.5 rounded-xl mx-auto"
+        className={`mb-5 text-amber-950 hover:bg-orange-100 hover:text-amber-900 transition-all duration-300 p-3.5 rounded-xl flex flex-col ${isExpanded? 'items-start' :'mx-auto'}`}
         onClick={toggleSidebar}
       >
         {isExpanded ?  <BackIcon className='rotate-180'/> : <BackIcon/>}
@@ -25,10 +25,10 @@ const Sidebar = () => {
       </button>
       <div className="flex flex-col space-y-4">
         {menuItems.map((item, index) => (
-          <div key={index} className="flex flex-col items-center text-amber-950 cursor-pointer hover:bg-orange-100 hover:text-amber-900 transition-all duration-300 py-2 rounded-xl">
+          <div key={index} className={`flex flex-col ${isExpanded? 'items-start px-3':'items-center'} text-amber-950 cursor-pointer hover:bg-orange-100 hover:text-amber-900 transition-all duration-300 py-2 rounded-xl`}>
             <div className='flex'>
                 <span className="text-2xl">{item.icon}</span>
-                {isExpanded && <span className="ml-4 items-center justify-center flex">{item.text}</span>}
+                {isExpanded && <span className="ml-6 items-center justify-center flex">{item.text}</span>}
             </div>
           </div>
         ))}
