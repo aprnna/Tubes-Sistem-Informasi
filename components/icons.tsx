@@ -158,6 +158,75 @@ export const BackIcon: React.FC<IconSvgProps> = ({
   );
 };
 
+export const ManageMenu: React.FC<IconSvgProps> = ({
+  size = 35,
+  width,
+  height,
+  ...props
+}) => {
+  return (
+    <svg
+      height={size || height}
+      viewBox="0 0 35 35"
+      width={size || width}
+      {...props}
+    >
+      <path
+        clipRule="evenodd"
+        d="M3.80982 0C1.70401 0 0 1.70401 0 3.80982V30.4775C0 32.5758 1.71151 34.2873 3.80982 34.2873H25.0905L21.2806 30.4775H3.80982V7.61929H30.4775V21.2806L34.2873 25.0905V3.80982C34.2873 1.70401 32.5833 0 30.4775 0H3.80982ZM7.61929 13.3338V17.1437H11.4291V13.3338H7.61929ZM15.2389 13.3338V17.1437H26.668V13.3338H15.2389ZM7.61929 20.9535V24.7629H11.4291V20.9535H7.61929ZM15.2389 20.9535V24.7629H19.0484V20.9535H15.2389ZM22.8582 22.8582V26.668L32.6576 36.4674L36.4674 32.6576L26.668 22.8582H22.8582ZM37.8218 34.0119L34.0119 37.8218L35.917 39.7265C36.2813 40.0912 36.8917 40.0912 37.2635 39.7265L39.7265 37.2635C40.0912 36.8842 40.0912 36.2813 39.7265 35.917L37.8218 34.0119Z"
+        fill="currentColor"
+        fillRule="evenodd"
+      />
+    </svg>
+  );
+};
+
+export const OngoingOrders: React.FC<IconSvgProps> = ({
+  size = 39,
+  width,
+  height,
+  ...props
+}) => {
+  return (
+    <svg
+      height={size || height}
+      viewBox="0 0 39 35"
+      width={size || width}
+      {...props}
+    >
+      <path
+        clipRule="evenodd"
+        d="M3.5 0V21H0V26.25C0 29.1416 2.3584 31.5 5.25 31.5H19.25V28L22.75 24.5L19.25 21H7V3.5H29.75V10.5H33.25V0H3.5ZM10.5 7V10.5H14V7H10.5ZM17.5 7V10.5H26.25V7H17.5ZM10.5 14V17.5H14V14H10.5ZM22.75 14V17.5H24.5V20.8496L28.1504 24.5L24.5 28.1504V31.5H22.75V35H38.5V31.5H36.75V28.1504L33.0996 24.5L36.75 20.8496V17.5H38.5V14H22.75ZM28 17.5H33.25V19.4004L30.625 22.0254L28 19.4004V17.5ZM30.625 26.9746L33.25 29.5996V31.5H28V29.5996L30.625 26.9746Z"
+        fill="currentColor"
+        fillRule="evenodd"
+      />
+    </svg>
+  );
+};
+
+export const StorageIcon: React.FC<IconSvgProps> = ({
+  size = 35,
+  width,
+  height,
+  ...props
+}) => {
+  return (
+    <svg
+      height={size || height}
+      viewBox="0 0 28 35"
+      width={size || width}
+      {...props}
+    >
+      <path
+        clipRule="evenodd"
+        d="M22.75 -0.00170898H5.25C2.3584 -0.00170898 0 2.35669 0 5.24829V13.9983H24.5V17.4983H0V29.7483C0 32.6399 2.3584 34.9983 5.25 34.9983H22.75C25.6416 34.9983 28 32.6399 28 29.7483V5.24829C28 2.35669 25.6416 -0.00170898 22.75 -0.00170898ZM8.75 10.4983H5.25V6.99829H8.75V10.4983ZM8.75 27.9983H5.25V20.9983H8.75V27.9983Z"
+        fill="currentColor"
+        fillRule="evenodd"
+      />
+    </svg>
+  );
+};
+
 
 
 export const MoonFilledIcon = ({
