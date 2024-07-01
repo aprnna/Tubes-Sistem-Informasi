@@ -1,33 +1,36 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { NextRequest } from 'next/server'
 import { createClient } from '@/utils/supabase/server'
+import getResponse from '@/utils/getResponse'
 
 export async function POST(req: NextRequest) {
   const supabase = createClient()
-  const data = await req.formData();
+  const {email, password,nama, umur, no_telp, role} = await req.json();
   const { data:dataAuth, error } = await supabase.auth.signUp({
-    email: data.get('email') as string,
-    password: data.get('password') as string,
+    email: email as string,
+    password: password as string,
   })
 
   if (error) {
+    getResponse(error, 'error login', 400)
     redirect('/error')
   }
 
   const { error:errorInsert } = await supabase.from('users').upsert({
     id: dataAuth.user?.id as string,
-    full_name: data.get('full_name') as string,
-    age: data.get('age'),
-    updated_at: new Date().toISOString(),
+    nama: nama as string,
+    umur: umur,
+    no_telp: no_telp as string,
+    role: role as string,
+    updatedAt: new Date().toISOString(),
   })
 
   if(errorInsert) {
+    getResponse(errorInsert, 'error create new user', 400)
     redirect('/error')
   }
 
-  revalidatePath('/', 'layout')
-  redirect('/account')
+  return getResponse(dataAuth, 'success create new user', 200)
 }
