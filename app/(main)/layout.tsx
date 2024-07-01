@@ -1,4 +1,5 @@
 import { Navbar } from "@/components/navbar";
+import Sidebar from "@/components/sidebar";
 import { Link } from "@nextui-org/link";
 
 
@@ -10,6 +11,7 @@ export default function Layout({
   return (
     <>
       <main className="w-full h-screen flex items-center justify-center bg-slate-900">
+          <Sidebar />
           {children}
       </main>
     </>
