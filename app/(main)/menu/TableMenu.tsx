@@ -27,7 +27,7 @@ export default function TableMenu() {
   ];
 
   return (
-    <div className="w-full p-10">
+    <div className="w-full h-auto p-10">
       <h1 className="text-2xl font-bold">Menu</h1>
       {loading ? (
         <div className="flex flex-col items-center h-auto p-10">

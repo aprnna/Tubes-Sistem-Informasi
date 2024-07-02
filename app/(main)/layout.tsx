@@ -11,7 +11,7 @@ export default function Layout({
   return (
     <>
       <main className="w-full h-screen flex items-center justify-center bg-slate-900">
-          <Sidebar />
+          {/* <Sidebar /> */}
           {children}
       </main>
     </>

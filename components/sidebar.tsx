@@ -21,7 +21,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className={`flex flex-col h-screen p-3 bg-white ${isExpanded ? 'w-72' : 'w-24'} transition-all duration-300 shadow-2xl`}>
+    <div className={`flex flex-col h-screen p-3 bg-white ${isExpanded ? 'w-72' : 'w-24'} transition-all duration-300 drop-shadow-md`}>
       <button
         className={`mb-5 text-amber-950 hover:bg-orange-100 hover:text-amber-900 transition-all duration-300 p-3.5 rounded-xl flex flex-col ${isExpanded? 'items-start' :'mx-auto'}`}
         onClick={toggleSidebar}
