@@ -12,7 +12,9 @@ export default function Layout({
     <>
       <main className="w-full h-screen flex items-center justify-center bg-slate-900">
           {/* <Sidebar /> */}
-          {children}
+          <div className="flex flex-1 overflow-hidden">
+            {children}
+          </div>
       </main>
     </>
     // <div className="relative flex flex-col h-screen">
