@@ -89,6 +89,146 @@ export const GithubIcon: React.FC<IconSvgProps> = ({
   );
 };
 
+export const MenuIcon: React.FC<IconSvgProps> = ({
+  size = 35,
+  width,
+  height,
+  ...props
+}) => {
+  return (
+    <svg
+      height={size || height}
+      viewBox="0 0 35 35"
+      width={size || width}
+      {...props}
+    >
+      <path
+        clipRule="evenodd"
+        d="M17.5 -0.00170898L0 5.79498V34.9983H35V5.79498L17.5 -0.00170898ZM17.5 3.49809L31.5002 8.20147V31.4985H3.4998V8.20147L17.5 3.49809ZM8.58577 8.74813L8.20318 9.45918C6.63079 11.0316 6.63079 13.465 8.20318 15.0373L15.422 22.2013L16.953 20.6703L26.2502 29.7483L27.836 28.1624L18.8673 19.2482L19.414 18.7015C21.3417 19.7542 23.9943 19.0979 25.922 17.1702C28.1983 15.0715 28.5471 11.7013 26.7968 9.95137C26.0996 9.2541 25.211 8.92597 24.3359 8.74813C22.7638 8.57061 20.8154 9.26099 19.414 10.6624C17.4862 12.5902 16.953 15.2424 17.8281 17.1702L17.2811 17.7171L15.039 15.4203L8.58577 8.74813ZM13.1251 21.9828L7.05473 28.0532L8.64057 29.639L14.7109 23.6234L13.1251 21.9828Z"
+        fill="currentColor"
+        fillRule="evenodd"
+      />
+    </svg>
+  );
+};
+
+export const OrdersIcon: React.FC<IconSvgProps> = ({
+  size = 35,
+  width,
+  height,
+  ...props
+}) => {
+  return (
+    <svg
+      height={size || height}
+      viewBox="0 0 35 35"
+      width={size || width}
+      {...props}
+    >
+      <path
+        clipRule="evenodd"
+        d="M3.91648 -0.00170898V21.3873H7.80549V3.8873H33.0831V29.165C33.0831 30.2664 32.2402 31.1093 31.1388 31.1093C30.068 31.1093 29.1945 30.2357 29.1945 29.165V25.2759H0.027832V29.165C0.027832 32.378 2.64809 34.9983 5.86117 34.9983H31.1388C34.3366 34.9983 36.9722 32.3627 36.9722 29.165V-0.00170898H3.91648ZM11.6945 9.72063V13.6093H15.5831V9.72063H11.6945ZM19.4722 9.72063V13.6093H29.1945V9.72063H19.4722ZM11.6945 17.4983V21.3873H15.5831V17.4983H11.6945ZM19.4722 17.4983V21.3873H29.1945V17.4983H19.4722Z"
+        fill="currentColor"
+        fillRule="evenodd"
+      />
+    </svg>
+  );
+};
+
+export const BackIcon: React.FC<IconSvgProps> = ({
+  size = 25,
+  width,
+  height,
+  ...props
+}) => {
+  return (
+    <svg
+      height={size || height}
+      viewBox="0 0 23 25"
+      width={size || width}
+      {...props}
+    >
+      <path
+        clipRule="evenodd"
+        d="M2.23592 0L0.274726 1.98316L10.947 12.4973L0.214844 23.0059L2.16532 25L14.9238 12.4973L2.23592 0ZM10.3694 0.0109827L8.39198 1.97218L18.8627 12.5027L8.5609 23.0278L10.5548 24.978L22.7851 12.4918L10.3694 0.0109827Z"
+        fill="currentColor"
+        fillRule="evenodd"
+      />
+    </svg>
+  );
+};
+
+export const ManageMenu: React.FC<IconSvgProps> = ({
+  size = 35,
+  width,
+  height,
+  ...props
+}) => {
+  return (
+    <svg
+      height={size || height}
+      viewBox="0 0 35 35"
+      width={size || width}
+      {...props}
+    >
+      <path
+        clipRule="evenodd"
+        d="M3.80982 0C1.70401 0 0 1.70401 0 3.80982V30.4775C0 32.5758 1.71151 34.2873 3.80982 34.2873H25.0905L21.2806 30.4775H3.80982V7.61929H30.4775V21.2806L34.2873 25.0905V3.80982C34.2873 1.70401 32.5833 0 30.4775 0H3.80982ZM7.61929 13.3338V17.1437H11.4291V13.3338H7.61929ZM15.2389 13.3338V17.1437H26.668V13.3338H15.2389ZM7.61929 20.9535V24.7629H11.4291V20.9535H7.61929ZM15.2389 20.9535V24.7629H19.0484V20.9535H15.2389ZM22.8582 22.8582V26.668L32.6576 36.4674L36.4674 32.6576L26.668 22.8582H22.8582ZM37.8218 34.0119L34.0119 37.8218L35.917 39.7265C36.2813 40.0912 36.8917 40.0912 37.2635 39.7265L39.7265 37.2635C40.0912 36.8842 40.0912 36.2813 39.7265 35.917L37.8218 34.0119Z"
+        fill="currentColor"
+        fillRule="evenodd"
+      />
+    </svg>
+  );
+};
+
+export const OngoingOrders: React.FC<IconSvgProps> = ({
+  size = 39,
+  width,
+  height,
+  ...props
+}) => {
+  return (
+    <svg
+      height={size || height}
+      viewBox="0 0 39 35"
+      width={size || width}
+      {...props}
+    >
+      <path
+        clipRule="evenodd"
+        d="M3.5 0V21H0V26.25C0 29.1416 2.3584 31.5 5.25 31.5H19.25V28L22.75 24.5L19.25 21H7V3.5H29.75V10.5H33.25V0H3.5ZM10.5 7V10.5H14V7H10.5ZM17.5 7V10.5H26.25V7H17.5ZM10.5 14V17.5H14V14H10.5ZM22.75 14V17.5H24.5V20.8496L28.1504 24.5L24.5 28.1504V31.5H22.75V35H38.5V31.5H36.75V28.1504L33.0996 24.5L36.75 20.8496V17.5H38.5V14H22.75ZM28 17.5H33.25V19.4004L30.625 22.0254L28 19.4004V17.5ZM30.625 26.9746L33.25 29.5996V31.5H28V29.5996L30.625 26.9746Z"
+        fill="currentColor"
+        fillRule="evenodd"
+      />
+    </svg>
+  );
+};
+
+export const StorageIcon: React.FC<IconSvgProps> = ({
+  size = 35,
+  width,
+  height,
+  ...props
+}) => {
+  return (
+    <svg
+      height={size || height}
+      viewBox="0 0 28 35"
+      width={size || width}
+      {...props}
+    >
+      <path
+        clipRule="evenodd"
+        d="M22.75 -0.00170898H5.25C2.3584 -0.00170898 0 2.35669 0 5.24829V13.9983H24.5V17.4983H0V29.7483C0 32.6399 2.3584 34.9983 5.25 34.9983H22.75C25.6416 34.9983 28 32.6399 28 29.7483V5.24829C28 2.35669 25.6416 -0.00170898 22.75 -0.00170898ZM8.75 10.4983H5.25V6.99829H8.75V10.4983ZM8.75 27.9983H5.25V20.9983H8.75V27.9983Z"
+        fill="currentColor"
+        fillRule="evenodd"
+      />
+    </svg>
+  );
+};
+
+
+
 export const MoonFilledIcon = ({
   size = 24,
   width,
