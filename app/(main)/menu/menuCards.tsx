@@ -24,6 +24,7 @@ export default function MenuCards(){
                         <div className="flex flex-col justify-center items-center gap-1">
                             <h1>{item.nama}</h1>
                             <p className="text-2xl font-bold">Rp. {item.harga}</p>
+                            <p className="text-center">{item.deskripsi}</p>
                         </div>
                     </div>
                 </div>
