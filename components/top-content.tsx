@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 
 const TopContent = () : JSX.Element =>{
     return(
-        <div className='flex bg-orange-950 text-red-100 justify-between items-center py-2 px-8 ' >
+        <div className='flex bg-amber-950 text-red-100 justify-between items-center py-2 px-8 ' >
             <div className='flex gap-5 items-center'>
                 <button className='bg-orange-900 p-2 rounded-lg hover:bg-orange-600 transition-all duration-300'>
                     <img alt="" src="./arrow-left.svg"/>
