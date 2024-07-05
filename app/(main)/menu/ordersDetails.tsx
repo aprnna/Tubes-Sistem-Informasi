@@ -2,7 +2,7 @@ import React from "react";
 
 export const OrderDetails = (): JSX.Element => {
   return (
-    <div className=" min-w-[572px] h-full">
+    <div className=" min-w-[572px] h-full relative">
         <div className="flex flex-col drop-shadow-lg h-full">
             <div className="bg-white mt-12 mr-12 items-center justify-center rounded-t-lg py-4 px-6">
                 <h1 className="font-bold text-3xl">Detail Pesanan</h1>
