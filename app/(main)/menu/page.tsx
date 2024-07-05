@@ -10,8 +10,10 @@ export default function AboutPage() {
     <div className="w-full h-screen bg-slate-50 flex flex-col">
       <TopContent />
       {/* <TableMenu /> */}
-      <div className="flex-1 overflow-y-auto flex flex-row">
-        <MenuCards />
+      <div className="flex overflow-y-auto">
+        <div className="flex-1  flex flex-row">
+          <MenuCards />
+        </div>
         <div className="flex flex-col">
           <OrderDetails/>
         </div>
