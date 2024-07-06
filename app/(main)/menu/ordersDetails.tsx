@@ -69,7 +69,7 @@ export const OrderDetails = (): JSX.Element => {
                 <h4 className="font-bold">Rp. {total.toFixed(2)}</h4>
               </div>
               <button className="bg-amber-950 text-slate-50 py-3 px-5 w-full rounded-lg mt-6">
-                Proses Pesanan
+                Bayar
               </button>
             </div>
             {/* <div className="bg-white mr-12 items-center justify-center rounded-b-lg py-4 px-6">
