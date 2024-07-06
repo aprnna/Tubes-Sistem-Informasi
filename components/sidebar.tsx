@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react';
-import { MenuIcon, OrdersIcon, BackIcon, ManageMenu, OngoingOrders, StorageIcon } from '@/components/icons';
+import { MenuIcon, OrdersIcon, BackIcon, ManageMenu, OngoingOrders, StorageIcon, Laporan } from '@/components/icons';
 
 const Sidebar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -17,6 +17,7 @@ const Sidebar = () => {
     { icon: <OngoingOrders />, text: 'Pesanan Berlangsung' },
     { icon: <ManageMenu />, text: 'Manajemen Menu' },
     { icon: <StorageIcon />, text: 'Bahan Baku' },
+    { icon: <Laporan />, text: 'Laporan' }
   ];
 
   return (

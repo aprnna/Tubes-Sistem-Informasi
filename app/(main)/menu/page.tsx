@@ -1,6 +1,6 @@
 import { title } from "@/components/primitives";
 // import Sidebar from "@/components/sidebar";
-import TableMenu from "./TableMenu"; // Import the client-side component
+import TableMenu from "./TableMenu";
 import TopContent from "@/components/top-content";
 import MenuCards from "./menuCards";
 import { OrderDetails } from "./ordersDetails";
@@ -13,8 +13,8 @@ export default function AboutPage() {
       <CartProvider>
         <TopContent />
         {/* <TableMenu /> */}
-        <div className="flex overflow-y-auto">
-          <div className="flex-1  flex flex-row">
+        <div className="flex overflow-hidden">
+          <div className="flex-1  flex flex-row overflow-auto">
             <MenuCards />
           </div>
           <div className="flex flex-col">
