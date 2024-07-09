@@ -1,18 +1,25 @@
-// import Sidebar from "@/components/sidebar";
+import { title } from "@/components/primitives";
 import TopContent from "@/components/top-content";
-import TableMenu from "./TableMenu";
+import MenuCards from "../menuCards";
+import { OrderDetails } from "../ordersDetails";
+import { CartProvider } from "../cartContext";
 
 export default function AboutPage() {
   
   return (
     <div className="w-full h-screen bg-slate-50 flex flex-col">
+      <CartProvider>
         <TopContent />
         {/* <TableMenu /> */}
         <div className="flex overflow-hidden">
           <div className="flex-1  flex flex-row overflow-auto">
-            <TableMenu/>
+            <MenuCards />
+          </div>
+          <div className="flex flex-col">
+            <OrderDetails/>
           </div>
         </div>
+      </CartProvider>
     </div>
   );
 }

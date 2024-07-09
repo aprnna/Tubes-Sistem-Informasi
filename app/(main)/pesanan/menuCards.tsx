@@ -70,7 +70,7 @@ export default function MenuCards(){
                       className="bg-amber-950 hover:bg-amber-900 text-white p-2 rounded-full"
                       onClick={() => decreaseQuantity(item.id)}
                     >
-                      <img alt="minus" src="./minus.svg" />    
+                      <img alt="minus" src="../minus.svg" />    
                     </button>
                     <span className="w-max min-w-10 p-2 px-4 text-center">
                       {cart.find(cartItem => cartItem.id === item.id)?.quantity}
@@ -79,7 +79,7 @@ export default function MenuCards(){
                       className="bg-amber-950 hover:bg-amber-900 text-white p-2 rounded-full"
                       onClick={() => increaseQuantity(item.id)}
                     >
-                      <img alt="plus" src="./add.svg" />
+                      <img alt="plus" src="../add.svg" />
                     </button>
                   </div>
                 ) : (

@@ -69,15 +69,15 @@ export const OrderDetails = (): JSX.Element => {
                 <div className="flex flex-col bg-white mr-12 py-6 px-6 drop-shadow-md shadow-inner gap-1 rounded-b-lg text-gray-600">
                   <div className="flex justify-between">
                     <h4>Sub Total</h4>
-                    <h4 className="font-medium">Rp. {subTotal}</h4>
+                    <h4 className="font-medium">Rp. {subTotal.toFixed(2)}</h4>
                   </div>
                   <div className="flex justify-between">
                     <h4>Tax (5%)</h4>
-                    <h4 className="font-medium">Rp. {tax}</h4>
+                    <h4 className="font-medium">Rp. {tax.toFixed(2)}</h4>
                   </div>
                   <div className="flex justify-between text-xl text-amber-900">
                     <h4>Total</h4>
-                    <h4 className="font-bold">Rp. {total}</h4>
+                    <h4 className="font-bold">Rp. {total.toFixed(2)}</h4>
                   </div>
                   <button className="bg-amber-950 text-slate-50 py-3 px-5 w-full rounded-lg mt-4 hover:bg-amber-900 transition-all duration-300">
                     Bayar
