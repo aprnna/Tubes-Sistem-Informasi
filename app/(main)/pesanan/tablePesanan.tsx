@@ -20,6 +20,7 @@ export default function TablePesanan() {
   }, []);
 
   const columns = [
+    {key: 'id', label: "Id Nota"},
     { key: "atasNama", label: "Atas Nama" },
     { key: "banyak_orang", label: "Banyak Orang" },
     { key: "created_at", label: "Dibuat" },

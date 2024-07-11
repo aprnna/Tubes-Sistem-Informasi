@@ -1,14 +1,21 @@
 import React from 'react';
 
 interface Column {
-    key: string;
-    label: string;
-  }
-  
-  interface TableProps {
-    columns: Column[];
-    data: any[];
-  }
+  key: string;
+  label: string;
+}
+
+interface TableProps {
+  columns: Column[];
+  data: any[];
+}
+
+function formatID(id: number): string {
+  const prefix = "NT";
+  const paddedID = id.toString().padStart(6, '0');
+
+  return `${prefix}${paddedID}`;
+}
 
 const Table: React.FC<TableProps> = ({ columns, data }) => {
   return (
@@ -36,10 +43,10 @@ const Table: React.FC<TableProps> = ({ columns, data }) => {
         <tbody className="bg-white divide-y divide-gray-200">
           {data.map((row, rowIndex) => (
             <tr key={rowIndex} className="hover:bg-red-100">
-                <td
-                    className={`px-6 py-3 text-center whitespace-nowrap text-xs font-medium text-gray-900 border-b border-gray-200 rounded-tl-xl rounded-bl-xl`}
-                >
-                    {rowIndex + 1}
+              <td
+                className={`px-6 py-3 text-center whitespace-nowrap text-xs font-medium text-gray-900 border-b border-gray-200 rounded-tl-xl rounded-bl-xl`}
+              >
+                {rowIndex + 1}
               </td>
               {columns.map((column, colIndex) => (
                 <td
@@ -50,7 +57,7 @@ const Table: React.FC<TableProps> = ({ columns, data }) => {
                       : ''
                   }`}
                 >
-                  {row[column.key]}
+                  {column.key === 'id' ? formatID(row[column.key]) : row[column.key]}
                 </td>
               ))}
             </tr>
