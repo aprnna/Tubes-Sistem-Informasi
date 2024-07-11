@@ -7,11 +7,14 @@ export default function MenuCards(){
     const [menu, setMenu] = useState([]);
     // const [cart, setCart] = useState<{ [key: number]: number }>({});
     const { cart, addToCart, increaseQuantity, decreaseQuantity } = useCart();
+    const [loading, setLoading] = useState(true);
 
     async function getMenu() {
+        setLoading(true);
         const {data} = await fetchApi("/menu", "GET");
 
         setMenu(data);
+        setLoading(false);
     }
 
     useEffect(() => {
@@ -55,7 +58,14 @@ export default function MenuCards(){
     //   };
 
     return (
-        <div className="flex flex-wrap items-center justify-around p-12 gap-8">
+      <div className={`flex flex-wrap items-center justify-around p-12 gap-8  ${loading?'w-full':'w-auto'}`}>
+        {loading ? (
+            <div className="flex flex-col items-center justify-center p-10 w-full h-full">
+            <img alt="Loading..." className="max-w-14" src="/loading1.gif" />
+            <p>Loading...</p>
+            </div>
+        ) : (
+          <>
           {menu.map((item: any) => (
             <div key={item.id} className="flex drop-shadow-md">
               <div className="flex flex-col bg-white w-[280px] h-auto p-6 rounded-lg items-center gap-4 hover:bg-red-100 transition-all duration-300">
@@ -93,6 +103,8 @@ export default function MenuCards(){
               </div>
             </div>
           ))}
+          </>
+        )}
         </div>
       );
 }

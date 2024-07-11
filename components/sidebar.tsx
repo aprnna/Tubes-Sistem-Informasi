@@ -2,8 +2,11 @@
 
 import React, { useState } from 'react';
 import { MenuIcon, OrdersIcon, BackIcon, ManageMenu, OngoingOrders, StorageIcon, Laporan } from '@/components/icons';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const Sidebar = () => {
+  let pathname = usePathname();
   const [isExpanded, setIsExpanded] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<number | null>(null);
 
@@ -12,12 +15,12 @@ const Sidebar = () => {
   };
 
   const menuItems = [
-    { icon: <MenuIcon />, text: 'Menu' },
-    { icon: <OrdersIcon />, text: 'Pesanan' },
-    { icon: <OngoingOrders />, text: 'Pesanan Berlangsung' },
-    { icon: <ManageMenu />, text: 'Manajemen Menu' },
-    { icon: <StorageIcon />, text: 'Bahan Baku' },
-    { icon: <Laporan />, text: 'Laporan' }
+    { icon: <MenuIcon />, text: 'Menu', href:'/pesanan/add'},
+    { icon: <OrdersIcon />, text: 'Pesanan' , href:'/pesanan'},
+    { icon: <OngoingOrders />, text: 'Pesanan Berlangsung' , href:'/pesanan/ongoing'},
+    { icon: <ManageMenu />, text: 'Manajemen Menu' , href:'/menu'},
+    { icon: <StorageIcon />, text: 'Bahan Baku' , href:'/'},
+    { icon: <Laporan />, text: 'Laporan' , href:'/'}
   ];
 
   return (
@@ -30,9 +33,11 @@ const Sidebar = () => {
       </button>
       <div className="flex flex-col space-y-4 relative">
         {menuItems.map((item, index) => (
-          <div
+          <Link
             key={index}
-            className={`flex flex-col ${isExpanded ? 'items-start px-3' : 'items-center'} text-amber-950 cursor-pointer hover:bg-red-100 hover:text-amber-900 transition-all duration-300 p-3 py-4 rounded-xl relative`}
+            className={`flex flex-col ${isExpanded ? 'items-start px-3' : 'items-center'} cursor-pointer hover:bg-red-100 hover:text-amber-900 transition-all duration-300 p-3 py-4 rounded-xl relative ${pathname === item.href ?'bg-red-100 text-amber-900':'text-amber-950'}`}
+            href={item.href}
+            onClick={() =>console.log("pathnow:", pathname)}
             onMouseEnter={() => setHoveredItem(index)}
             onMouseLeave={() => setHoveredItem(null)}
           >
@@ -49,7 +54,7 @@ const Sidebar = () => {
                 {item.text}
               </div>
             )}
-          </div>
+          </Link>
         ))}
       </div>
     </div>
