@@ -9,7 +9,7 @@ export default function Layout({
   return (
     <>
       <section className="w-full h-auto flex items-center justify-center bg-slate-900">
-            <Sidebar role={'pelayan'} />
+            <Sidebar />
             {children}
       </section>
     </>
