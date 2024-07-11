@@ -3,9 +3,36 @@
 import { useEffect, useState } from "react";
 import fetchApi from "@/utils/fetchApi";
 
+interface MenuItem {
+    id: number;
+    nama: string;
+    harga: number;
+    foto: string;
+}
+
+interface OrderItem {
+    id_menu: number;
+    jumlah: number;
+}
+
+interface Order {
+    id: number;
+    atasNama: string;
+    banyak_orang: number;
+    created_at: string;
+    id_users: string;
+}
+
+interface OrderData {
+    order: Order[];
+    menuDetails: MenuItem[];
+    items: OrderItem[];
+}
+
+
 export default function OrderCards() {
     const [orders, setOrders] = useState([]);
-    const [orderData, setOrderData] = useState(null);
+    const [orderData, setOrderData] = useState<OrderData | null>(null);
     const [loading, setLoading] = useState(true);
     const [detailsLoading, setDetailsLoading] = useState(false);
     const [subtotal, setSubtotal] = useState(0);
@@ -27,7 +54,7 @@ export default function OrderCards() {
         setDetailsLoading(false);
     }
 
-    async function updateOrderStatus(orderId:string) {
+    async function updateOrderStatus(orderId:number) {
         setDetailsLoading(true);
         const { data, error } = await fetchApi(`/pesanan/${orderId}`, "PUT", { status: 'selesai' });
 
