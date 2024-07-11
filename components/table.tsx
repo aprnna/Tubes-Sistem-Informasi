@@ -17,6 +17,27 @@ function formatID(id: number): string {
   return `${prefix}${paddedID}`;
 }
 
+function formatToDateTimeLocal(timestamp:string) {
+  const parts = timestamp.split('T');
+  
+  const datePart = parts[0].split('-');
+  const year = datePart[0];
+  const month = datePart[1];
+  const day = datePart[2];
+
+  const timePart = parts[1].split('.')[0].split(':');
+
+  const hour = timePart[0];
+  const minute = timePart[1];
+  const second = timePart[2];
+
+  const formattedDateTimeLocal = `${day}-${month}-${year} ${hour}:${minute}:${second}`;
+
+  console.log(formattedDateTimeLocal)
+
+  return formattedDateTimeLocal;
+}
+
 const Table: React.FC<TableProps> = ({ columns, data }) => {
   return (
     <div className="overflow-x-auto px-12 py-4">
@@ -57,7 +78,7 @@ const Table: React.FC<TableProps> = ({ columns, data }) => {
                       : ''
                   }`}
                 >
-                  {column.key === 'id' ? formatID(row[column.key]) : row[column.key]}
+                  {column.key === 'id' ? formatID(row[column.key]) : column.key === 'created_at' ? formatToDateTimeLocal(row[column.key]) : row[column.key]}
                 </td>
               ))}
             </tr>
