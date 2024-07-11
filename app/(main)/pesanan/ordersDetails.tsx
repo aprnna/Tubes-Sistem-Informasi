@@ -7,10 +7,18 @@ import { motion, AnimatePresence } from 'framer-motion';
 export const OrderDetails = (): JSX.Element => {
     const { cart } = useCart();
 
+    function formatCurrency(amount: number): string {
+      return new Intl.NumberFormat('id-ID', {
+          style: 'currency',
+          currency: 'IDR'
+      }).format(amount);
+  }
+
+
     const subTotal = cart.reduce((sum, item) => sum + item.harga * item.quantity, 0);
     const tax = subTotal * 0.05;
     const total = subTotal + tax;
-
+  
     return (
         <AnimatePresence>
           {cart.length > 0 && (
@@ -69,15 +77,15 @@ export const OrderDetails = (): JSX.Element => {
                 <div className="flex flex-col bg-white mr-12 py-6 px-6 drop-shadow-md shadow-inner gap-1 rounded-b-lg text-gray-600">
                   <div className="flex justify-between">
                     <h4>Sub Total</h4>
-                    <h4 className="font-medium">Rp. {subTotal.toFixed(2)}</h4>
+                    <h4 className="font-medium">{formatCurrency(subTotal)}</h4>
                   </div>
                   <div className="flex justify-between">
                     <h4>Tax (5%)</h4>
-                    <h4 className="font-medium">Rp. {tax.toFixed(2)}</h4>
+                    <h4 className="font-medium">{formatCurrency(tax)}</h4>
                   </div>
                   <div className="flex justify-between text-xl text-amber-900">
                     <h4>Total</h4>
-                    <h4 className="font-bold">Rp. {total.toFixed(2)}</h4>
+                    <h4 className="font-bold">{formatCurrency(total)}</h4>
                   </div>
                   <button className="bg-amber-950 text-slate-50 py-3 px-5 w-full rounded-lg mt-4 hover:bg-amber-900 transition-all duration-300">
                     Bayar

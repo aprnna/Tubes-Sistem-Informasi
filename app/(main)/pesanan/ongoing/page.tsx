@@ -7,9 +7,7 @@ export default function AboutPage() {
   return (
     <div className="w-full h-screen bg-slate-50 flex flex-col">
         <TopContent />
-        <div className="overflow-auto">
-          <OrderCards/>
-        </div>
+        <OrderCards/>
     </div>
   );
 }
