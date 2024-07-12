@@ -66,6 +66,7 @@ Licensed under the [MIT license](https://github.com/nextui-org/next-app-template
 - design detail cetak nota ✅
 - design tampilan pesanan ✅
 - design pencarian ✅
+- batasan tampilan sidebar ✅
 
 
 ### Koki
@@ -74,13 +75,14 @@ Licensed under the [MIT license](https://github.com/nextui-org/next-app-template
 - design detail pesanan diproses ✅
 - design crud menu ❌
 - design table menu ❌
-- design pencarian ❌
+- batasan tampilan sidebar ✅
 
 ### Karyawan Gudang
 - design table bahan baku ❌
 - design crud bahan baku ❌
 - design riwayat bahan baku ❌
-- design pencarian ❌
+- design pencarian ✅
+- batasan tampilan sidebar ✅
 
 ### Manager
 - design laporan ❌
@@ -94,6 +96,7 @@ Licensed under the [MIT license](https://github.com/nextui-org/next-app-template
 - post pesanan & menu ❌
 - get pesanan ✅
 - fungsi pencarian ✅
+- hak akses ❌
 
 
 ### Koki
@@ -102,7 +105,6 @@ Licensed under the [MIT license](https://github.com/nextui-org/next-app-template
 - post menu ❌
 - update menu ❌
 - update ketersediaan menu ❌
-- fungsi pencarian ❌
 - hak akses ❌
 
 ### Karyawan Gudang
