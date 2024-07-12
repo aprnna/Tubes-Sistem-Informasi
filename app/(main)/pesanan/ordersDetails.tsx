@@ -1,27 +1,71 @@
 'use client'
 
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { useCart } from "./cartContext";
 import { motion, AnimatePresence } from 'framer-motion';
+import Modal from "@/components/modal";
+import fetchApi from "@/utils/fetchApi";
+import { formatCurrency } from "@/utils/formatCurrency";
 
 export const OrderDetails = (): JSX.Element => {
-    const { cart } = useCart();
+    const { cart, dateTime, updateDateTime, emptyCart} = useCart();
+    const [lastId, setLastID] = useState("");
 
-    function formatCurrency(amount: number): string {
-      return new Intl.NumberFormat('id-ID', {
-          style: 'currency',
-          currency: 'IDR'
-      }).format(amount);
-  }
+    const [showMainModal, setShowMainModal] = useState(false);
+    const [showAlertModal, setShowAlertModal] = useState(false);
+    
+    const [nama, setNama] = useState("");
+    const [jumlahOrang, setJumlahOrang] = useState(1);
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      updateDateTime(event.target.value);
+    };
+
+    const handleChangeNama = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setNama(event.target.value);
+    };
+
+    const handleChangeJumlahOrang = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setJumlahOrang(Number(event.target.value));
+    };
+
+    const handleBayar = () => {
+      if (!nama || jumlahOrang < 1) {
+        setShowAlertModal(true);
+      } else {
+        setShowMainModal(true);
+      }
+    };
 
 
     const subTotal = cart.reduce((sum, item) => sum + item.harga * item.quantity, 0);
     const tax = subTotal * 0.05;
     const total = subTotal + tax;
+
+    async function getLastId() {
+      const {data} = await fetchApi("/pesanan/last", "GET");
+      const newOrderId = data? `NT${String(data[0].id + 1).padStart(6, '0')}` : "NT000001";
+
+      setLastID(newOrderId);
+    }
+    
+    function handlerGetlastID(){
+      setShowMainModal(false);
+      setNama("");
+      setJumlahOrang(1);
+      emptyCart(cart);
+      getLastId();
+      alert("Cetak Nota Berhasil")
+    }
+
+    useEffect(()=>{
+      getLastId();
+    },[]);
   
     return (
         <AnimatePresence>
           {cart.length > 0 && (
+            <>
             <motion.div
               animate={{ x: 0 }}
               className="w-[420px] h-full relative"
@@ -35,23 +79,23 @@ export const OrderDetails = (): JSX.Element => {
                   <div className="flex flex-col gap-1 pt-1.5 text-sm text-gray-600">
                     <div className="flex justify-between">
                       <h4>ID Pesanan</h4>
-                      <input disabled className="text-end bg-white font-medium" type="text" value={"NT698320"} />
+                      <input disabled className="text-end bg-white font-medium" type="text" value={lastId} />
                     </div>
                     <div className="flex justify-between">
                       <h4>Atas Nama</h4>
-                      <input className="text-end bg-white font-medium" type="text" value={"Kurniawan"} />
+                      <input className="text-end bg-white font-medium" placeholder="Masukan Nama" type="text" value={nama} onChange={handleChangeNama} />
                     </div>
                     <div className="flex justify-between">
                       <h4>Jumlah Orang</h4>
-                      <input className="text-end bg-white font-medium" type="number" value={5} />
+                      <input className="text-end bg-white font-medium" min={1} placeholder="1" type="number" value={jumlahOrang} onChange={handleChangeJumlahOrang}/>
                     </div>
                     <div className="flex justify-between">
                       <h4>Tanggal Pesanan</h4>
-                      <input disabled className="text-end bg-white font-medium" type="datetime-local" />
+                      <input disabled className="text-end font-medium" type="timestamp" value={dateTime} onChange={handleChange}/>
                     </div>
                     <div className="flex justify-between">
                       <h4>ID Kasir</h4>
-                      <input disabled className="text-end bg-white font-medium" type="text" value={"KS345789"} />
+                      <input disabled className="text-end font-medium" type="text" value={"KS345789"} />
                     </div>
                   </div>
                   <div className="flex flex-col mt-2 min-h-48 max-h-48">
@@ -87,13 +131,95 @@ export const OrderDetails = (): JSX.Element => {
                     <h4>Total</h4>
                     <h4 className="font-bold">{formatCurrency(total)}</h4>
                   </div>
-                  <button className="bg-amber-950 text-slate-50 py-3 px-5 w-full rounded-lg mt-4 hover:bg-amber-900 transition-all duration-300">
+                  <button 
+                    className="bg-amber-950 text-slate-50 py-3 px-5 w-full rounded-lg mt-4 hover:bg-amber-900 transition-all duration-300"
+                    onClick={() => handleBayar()}
+                  >
                     Bayar
                   </button>
                 </div>
               </div>
             </motion.div>
+            </>
+          )}
+          {showAlertModal && (
+            <Modal key={showAlertModal ? 'show' : 'hide'} closeModal={() => setShowAlertModal(false)} showModal={showAlertModal}>
+              <h2 className="text-2xl font-bold mb-4">Alert</h2>
+              <div className="w-full border-t-2 border-dashed border-gray-400 my-4" />
+              <p>Silakan isi dahulu nama dan jumlah orangnya.</p>
+              <button 
+                className="bg-amber-950 text-slate-50 py-3 px-5 w-full rounded-lg mt-8 hover:bg-amber-900 transition-all duration-300"
+                onClick={()=> setShowAlertModal(false)}
+              >
+                Oke
+              </button>
+            </Modal>
+          )}
+
+          {showMainModal && (
+           <Modal key={showMainModal ? 'show' : 'hide'} closeModal={() => setShowMainModal(false)} showModal={showMainModal}>
+              <h2 className="text-2xl font-bold">Nota Pemesanan</h2>
+              <div className="min-w-96 border-t-2 border-dashed border-gray-400 my-3" />
+              <div className="flex flex-col gap-1 text-sm text-gray-600">
+                <div className="flex justify-between">
+                  <h4>No Pesanan</h4>
+                  <h4>#{lastId}</h4>
+                </div>
+                <div className="flex justify-between">
+                  <h4>Atas Nama</h4>
+                  <h4>{nama}</h4>
+                </div>
+                <div className="flex justify-between">
+                  <h4>Jumlah Orang</h4>
+                  <h4>{jumlahOrang}</h4>
+                </div>
+                <div className="flex justify-between">
+                  <h4>Tanggal Pesanan</h4>
+                  <h4>{dateTime}</h4>
+                </div>
+              </div>
+              <div className="min-w-96 border-t-2 border-dashed border-gray-400 my-3" />
+              <div className="flex flex-col gap-1 text-sm text-gray-600">
+                <div className="flex justify-between w-full">
+                    <h4 className="w-1/3 text-start">No</h4>
+                    <h4 className="w-1/3 text-start">Menu</h4>
+                    <h4 className="w-1/3 text-center">Jumlah</h4>
+                    <h4 className="w-1/3 text-end">Harga</h4>
+                </div>
+              {cart.map((item, index) => (
+                <div key={item.id} className="flex justify-between items-center">
+                  <h4 className="w-1/3 text-start">{index + 1}</h4>
+                  <h4 className="w-1/3 text-start">{item.nama}</h4>
+                  <h4 className="w-1/3 text-center">{item.quantity}</h4>
+                  <h4 className="w-1/3 text-end">{item.harga}</h4>
+                </div>
+              ))}
+              </div>
+              <div className="min-w-96 border-t-2 border-dashed border-gray-400 my-3" />
+              <div className="flex flex-col gap-1 text-sm text-gray-600">
+                <div className="flex justify-between">
+                  <h4>Sub Total</h4>
+                  <h4>{formatCurrency(subTotal)}</h4>
+                </div>
+                <div className="flex justify-between">
+                  <h4>Pajak (5%)</h4>
+                  <h4>{formatCurrency(tax)}</h4>
+                </div>
+                <div className="flex justify-between">
+                  <h4>Total</h4>
+                  <h4>{formatCurrency(total)}</h4>
+                </div>
+              </div>
+              <div className="min-w-96 border-t-2 border-dashed border-gray-400 my-3" />
+              <button 
+                className="bg-amber-950 text-slate-50 py-3 px-5 w-full rounded-lg mt-2 hover:bg-amber-900 transition-all duration-300"
+                onClick={() => handlerGetlastID()}
+              >
+                Cetak Nota
+              </button>
+          </Modal>
           )}
         </AnimatePresence>
+        
       );
 };

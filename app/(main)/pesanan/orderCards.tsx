@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import fetchApi from "@/utils/fetchApi";
+import {formatCurrency} from "@/utils/formatCurrency";
 
 interface MenuItem {
     id: number;
@@ -119,13 +120,6 @@ export default function OrderCards() {
 
     const tax = subtotal * taxRate;
     const total = subtotal + tax;
-    
-    function formatCurrency(amount: number): string {
-        return new Intl.NumberFormat('id-ID', {
-            style: 'currency',
-            currency: 'IDR'
-        }).format(amount);
-    }
 
     return (
         <div className="flex overflow-hidden">

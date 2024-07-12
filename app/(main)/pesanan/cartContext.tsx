@@ -1,5 +1,6 @@
 'use client'
 
+import { getDateTimeLocal } from "@/utils/getDateTimeLocal";
 import React, { createContext, useState, useContext, ReactNode } from "react";
 
 interface CartItem {
@@ -12,15 +13,20 @@ interface CartItem {
 
 interface CartContextProps {
   cart: CartItem[];
+  dateTime: string;
   addToCart: (item: CartItem) => void;
   increaseQuantity: (id: number) => void;
   decreaseQuantity: (id: number) => void;
+  updateDateTime: (dateTime: string) => void;
+  emptyCart: (item: CartItem[]) => void;
 }
 
 const CartContext = createContext<CartContextProps | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [dateTime, setDateTime] = useState<string>(getDateTimeLocal());
+
 
   const addToCart = (item: CartItem) => {
     setCart((prevCart) => {
@@ -56,8 +62,17 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
+  const updateDateTime = (dateTime: string) => {
+    setDateTime(dateTime);
+  };
+
+  const emptyCart = (item:CartItem[]) =>{
+    setCart([]);
+  }
+
+
   return (
-    <CartContext.Provider value={{ cart, addToCart, increaseQuantity, decreaseQuantity }}>
+    <CartContext.Provider value={{ cart, dateTime, addToCart, increaseQuantity, decreaseQuantity, updateDateTime, emptyCart }}>
       {children}
     </CartContext.Provider>
   );

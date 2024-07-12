@@ -2,11 +2,12 @@
 import { useEffect, useState } from "react";
 import fetchApi from "@/utils/fetchApi";
 import { useCart} from "./cartContext";
+import { getDateTimeLocal } from "@/utils/getDateTimeLocal";
 
 export default function MenuCards(){
     const [menu, setMenu] = useState([]);
     // const [cart, setCart] = useState<{ [key: number]: number }>({});
-    const { cart, addToCart, increaseQuantity, decreaseQuantity } = useCart();
+    const { cart, addToCart, increaseQuantity, decreaseQuantity, updateDateTime} = useCart();
     const [loading, setLoading] = useState(true);
 
     async function getMenu() {
@@ -24,6 +25,21 @@ export default function MenuCards(){
     useEffect(() => {
         console.log("Cart updated:", cart);
     }, [cart]);
+
+    const handleAddToCart = (item:any) => {
+      addToCart(item);
+      updateDateTime(getDateTimeLocal());
+    };
+
+    const handleDecreaseQuantity = (id:number) => {
+      decreaseQuantity(id);
+      updateDateTime(getDateTimeLocal());
+    };
+
+    const handleIncreaseQuantity = (id:number) => {
+      increaseQuantity(id);
+      updateDateTime(getDateTimeLocal());
+    };
 
     // const addToCart = (id: number) => {
     //     console.log("Added menu id:", id);
@@ -78,7 +94,7 @@ export default function MenuCards(){
                   <div className="flex items-center gap-3 w-max justify-center bg-white rounded-full">
                     <button
                       className="bg-amber-950 hover:bg-amber-900 text-white p-2 rounded-full"
-                      onClick={() => decreaseQuantity(item.id)}
+                      onClick={() => handleDecreaseQuantity(item.id)}
                     >
                       <img alt="minus" src="../minus.svg" />    
                     </button>
@@ -87,7 +103,7 @@ export default function MenuCards(){
                     </span>
                     <button
                       className="bg-amber-950 hover:bg-amber-900 text-white p-2 rounded-full"
-                      onClick={() => increaseQuantity(item.id)}
+                      onClick={() => handleIncreaseQuantity(item.id)}
                     >
                       <img alt="plus" src="../add.svg" />
                     </button>
@@ -95,7 +111,7 @@ export default function MenuCards(){
                 ) : (
                   <button
                     className="bg-amber-950 hover:bg-amber-900 text-slate-50 py-3 rounded-xl cursor-pointer transition-all duration-300 w-full"
-                    onClick={() => addToCart({ id: item.id, nama: item.nama, harga: item.harga, foto: item.foto, quantity: 1 })}
+                    onClick={() => handleAddToCart({ id: item.id, nama: item.nama, harga: item.harga, foto: item.foto, quantity: 1 })}
                   >
                     Tambahkan Menu
                   </button>
