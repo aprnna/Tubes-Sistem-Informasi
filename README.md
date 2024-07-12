@@ -65,7 +65,7 @@ Licensed under the [MIT license](https://github.com/nextui-org/next-app-template
 - design detail pesanan ✅
 - design detail cetak nota ✅
 - design tampilan pesanan ✅
-- design pencarian ❌
+- design pencarian ✅
 
 
 ### Koki
@@ -93,7 +93,7 @@ Licensed under the [MIT license](https://github.com/nextui-org/next-app-template
 ### Kasir
 - post pesanan & menu ❌
 - get pesanan ✅
-- fungsi pencarian ❌
+- fungsi pencarian ✅
 
 ### Koki
 - update status menjadi selesai ✅
