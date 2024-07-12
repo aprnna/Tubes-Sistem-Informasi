@@ -1,7 +1,7 @@
 'use client'
 
 import React, {useEffect, useState} from "react";
-import { useCart } from "./cartContext";
+import { useCart } from "./allContext";
 import { motion, AnimatePresence } from 'framer-motion';
 import Modal from "@/components/modal";
 import fetchApi from "@/utils/fetchApi";
@@ -74,7 +74,7 @@ export const OrderDetails = (): JSX.Element => {
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
             >
               <div className="flex flex-col drop-shadow-lg h-full">
-                <div className="bg-white mt-12 mr-12 items-center justify-center rounded-t-lg py-4 px-6">
+                <div className="bg-white mr-12 items-center justify-center rounded-t-lg py-4 px-6">
                   <h1 className="font-bold text-2xl">Detail Pesanan</h1>
                   <div className="flex flex-col gap-1 pt-1.5 text-sm text-gray-600">
                     <div className="flex justify-between">
@@ -91,11 +91,11 @@ export const OrderDetails = (): JSX.Element => {
                     </div>
                     <div className="flex justify-between">
                       <h4>Tanggal Pesanan</h4>
-                      <input disabled className="text-end font-medium" type="timestamp" value={dateTime} onChange={handleChange}/>
+                      <input disabled className="text-end bg-white font-medium" type="timestamp" value={dateTime} onChange={handleChange}/>
                     </div>
                     <div className="flex justify-between">
                       <h4>ID Kasir</h4>
-                      <input disabled className="text-end font-medium" type="text" value={"KS345789"} />
+                      <input disabled className="text-end bg-white font-medium" type="text" value={"KS345789"} />
                     </div>
                   </div>
                   <div className="flex flex-col mt-2 min-h-48 max-h-48">

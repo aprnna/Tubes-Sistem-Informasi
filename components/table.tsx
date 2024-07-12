@@ -40,7 +40,7 @@ function formatToDateTimeLocal(timestamp:string) {
 
 const Table: React.FC<TableProps> = ({ columns, data }) => {
   return (
-    <div className="overflow-x-auto px-12 py-4">
+    <div className="overflow-x-auto px-12 pb-4">
       <table className="min-w-full border-separate border-spacing-0 border-spacing-y-2">
         <thead className="bg-amber-900">
           <tr>

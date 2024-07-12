@@ -1,13 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
 import fetchApi from "@/utils/fetchApi";
-import { useCart} from "./cartContext";
+import { useCart} from "./allContext";
 import { getDateTimeLocal } from "@/utils/getDateTimeLocal";
 
 export default function MenuCards(){
     const [menu, setMenu] = useState([]);
     // const [cart, setCart] = useState<{ [key: number]: number }>({});
-    const { cart, addToCart, increaseQuantity, decreaseQuantity, updateDateTime} = useCart();
+    const { cart, searchQuery, searchCategory, addToCart, increaseQuantity, decreaseQuantity, updateDateTime} = useCart();
     const [loading, setLoading] = useState(true);
 
     async function getMenu() {
@@ -40,6 +40,10 @@ export default function MenuCards(){
       increaseQuantity(id);
       updateDateTime(getDateTimeLocal());
     };
+
+    const filteredMenu = menu.filter((item:any) =>
+      (item.nama.toLowerCase().includes(searchQuery.toLowerCase()) || item.kategori.toLowerCase().includes(searchCategory.toLowerCase()))
+    );
 
     // const addToCart = (id: number) => {
     //     console.log("Added menu id:", id);
@@ -74,7 +78,7 @@ export default function MenuCards(){
     //   };
 
     return (
-      <div className={`flex flex-wrap items-center justify-around p-12 gap-8  ${loading?'w-full':'w-auto'}`}>
+      <div className={`flex flex-wrap ${cart.length > 0?"justify-around":"justify-between"} px-12 gap-8 pb-6 h-max ${loading?'w-full':'w-auto'}`}>
         {loading ? (
             <div className="flex flex-col items-center justify-center p-10 w-full h-full">
             <img alt="Loading..." className="max-w-14" src="/loading1.gif" />
@@ -82,10 +86,10 @@ export default function MenuCards(){
             </div>
         ) : (
           <>
-          {menu.map((item: any) => (
+          {filteredMenu.map((item: any) => (
             <div key={item.id} className="flex drop-shadow-md">
-              <div className="flex flex-col bg-white w-[280px] h-auto p-6 rounded-lg items-center gap-4 hover:bg-red-100 transition-all duration-300">
-                <img alt={item.nama} className="border w-full h-auto max-h-[270px] min-h-[270px] rounded-xl" src={item.foto} />
+              <div className={`flex flex-col bg-white ${cart.length > 0?"w-[260px]":"w-[285px]"} h-auto p-6 rounded-lg items-center gap-4 hover:bg-red-100 transition-all duration-300`}>
+                <img alt={item.nama} className={`border w-full h-auto ${cart.length > 0?"max-h-[250px] min-h-[250px]":"max-h-[270px] min-h-[270px]"} rounded-xl`} src={item.foto} />
                 <div className="flex flex-col justify-center items-center gap-1">
                   <h1>{item.nama}</h1>
                   <p className="text-2xl font-bold">Rp. {item.harga}</p>

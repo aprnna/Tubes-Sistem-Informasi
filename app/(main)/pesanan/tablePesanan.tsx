@@ -2,10 +2,12 @@
 import { useEffect, useState } from "react";
 import fetchApi from "@/utils/fetchApi";
 import Table from "@/components/table";
+import { useCart } from "./allContext";
 
 export default function TablePesanan() {
-  const [menu, setMenu] = useState([]);
+  const [pesanan, setMenu] = useState([]);
   const [loading, setLoading] = useState(true);
+  const {searchQuery} = useCart();
 
   async function getMenu() {
     setLoading(true);
@@ -28,6 +30,12 @@ export default function TablePesanan() {
 
   ];
 
+  const filteredPesanan = pesanan.filter((item:any) =>
+    (
+      item.atasNama.toLowerCase().includes(searchQuery.toLowerCase()) || item.created_at.toString().includes(searchQuery)
+    ) 
+  );
+
   return (
     <>
         {loading ? (
@@ -36,7 +44,7 @@ export default function TablePesanan() {
             <p>Loading...</p>
             </div>
         ) : (
-            <Table columns={columns} data={menu}/>
+            <Table columns={columns} data={filteredPesanan}/>
         )}
     </>
   );

@@ -2,7 +2,8 @@ import { title } from "@/components/primitives";
 import TopContent from "@/components/top-content";
 import MenuCards from "../menuCards";
 import { OrderDetails } from "../ordersDetails";
-import { CartProvider } from "../cartContext";
+import { CartProvider } from "../allContext";
+import SearchBar from "@/components/searchBar";
 
 export default function AboutPage() {
   
@@ -11,6 +12,7 @@ export default function AboutPage() {
       <CartProvider>
         <TopContent />
         {/* <TableMenu /> */}
+        <SearchBar/>
         <div className="flex overflow-hidden">
           <div className="flex-1  flex flex-row overflow-auto">
             <MenuCards />

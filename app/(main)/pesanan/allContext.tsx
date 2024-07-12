@@ -14,11 +14,15 @@ interface CartItem {
 interface CartContextProps {
   cart: CartItem[];
   dateTime: string;
+  searchQuery: string;
+  searchCategory: string;
   addToCart: (item: CartItem) => void;
   increaseQuantity: (id: number) => void;
   decreaseQuantity: (id: number) => void;
   updateDateTime: (dateTime: string) => void;
   emptyCart: (item: CartItem[]) => void;
+  setSearchQuery:(searchQuery:string) => void;
+  setSearchCategory:(searchCategory:string) => void;
 }
 
 const CartContext = createContext<CartContextProps | undefined>(undefined);
@@ -26,6 +30,8 @@ const CartContext = createContext<CartContextProps | undefined>(undefined);
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [dateTime, setDateTime] = useState<string>(getDateTimeLocal());
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [searchCategory, setSearchCategory] = useState<string>("");
 
 
   const addToCart = (item: CartItem) => {
@@ -71,8 +77,9 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   }
 
 
+
   return (
-    <CartContext.Provider value={{ cart, dateTime, addToCart, increaseQuantity, decreaseQuantity, updateDateTime, emptyCart }}>
+    <CartContext.Provider value={{ cart, dateTime, searchQuery, searchCategory, addToCart, increaseQuantity, decreaseQuantity, updateDateTime, emptyCart, setSearchQuery, setSearchCategory}}>
       {children}
     </CartContext.Provider>
   );
