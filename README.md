@@ -95,6 +95,7 @@ Licensed under the [MIT license](https://github.com/nextui-org/next-app-template
 - get pesanan ✅
 - fungsi pencarian ✅
 
+
 ### Koki
 - update status menjadi selesai ✅
 - get pesanan ongoing ✅
@@ -102,6 +103,7 @@ Licensed under the [MIT license](https://github.com/nextui-org/next-app-template
 - update menu ❌
 - update ketersediaan menu ❌
 - fungsi pencarian ❌
+- hak akses ❌
 
 ### Karyawan Gudang
 - get bahan baku ❌
@@ -109,6 +111,7 @@ Licensed under the [MIT license](https://github.com/nextui-org/next-app-template
 - post bahan baku ❌
 - update bahan baku ❌
 - fungsi pencarian ❌
+- hak akses ❌
 
 ### Manager
 
