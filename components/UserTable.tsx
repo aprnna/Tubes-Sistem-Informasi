@@ -7,7 +7,7 @@ import {Table,
    TableCell, 
    getKeyValue
 
-} from "@nextui-org/react";
+} from "@nextui-org/table";
 
 const rows = [
   {
