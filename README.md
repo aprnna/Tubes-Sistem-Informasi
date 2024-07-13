@@ -93,7 +93,7 @@ Licensed under the [MIT license](https://github.com/nextui-org/next-app-template
 ## Fungsi
 
 ### Kasir
-- post pesanan & menu ❌
+- post pesanan & item_pesanan 9️0% tinggal id_usernya masih static karena belom ambil data dari login
 - get pesanan ✅
 - fungsi pencarian ✅
 - hak akses ❌
