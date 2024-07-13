@@ -1,5 +1,4 @@
 import Sidebar from "@/components/sidebar";
-import TopContent from "@/components/top-content";
 
 
 export default function Layout({

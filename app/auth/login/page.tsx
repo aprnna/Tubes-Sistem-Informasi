@@ -12,10 +12,10 @@ export default function LoginPage() {
         <div  className='max-w-md w-full space-y-5'>
           <h1 className={title()}>Silahkan Login</h1>
           <hr className='h-2 bg-black'/>
-          <form className='space-y-2' action='/api/auth/login' method='post'>
+          <form action='/api/auth/login' className='space-y-2' method='post'>
             <Input required id="email" label="Email" name="email" type="email" />
             <Input required id="password" label="Password" name="password" type="password" />
-            <Button color='primary' type='submit' className='w-full'>Log in</Button>
+            <Button className='w-full' color='primary' type='submit'>Log in</Button>
           </form>
         </div>
         
