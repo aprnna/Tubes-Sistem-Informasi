@@ -1,7 +1,7 @@
 
 import { title } from "@/components/primitives";
 import { createClient } from "@/utils/supabase/server";
-import Layout from "./(main)/layout";
+import Layout from "./(main)/Layout.1";
 async function getUser() {
   const supabase = createClient();
   
