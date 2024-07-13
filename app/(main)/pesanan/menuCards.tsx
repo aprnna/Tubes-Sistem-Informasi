@@ -43,7 +43,7 @@ export default function MenuCards(){
 
     const filteredMenu = menu.filter((item:any) =>
       // console.log(item)
-      ((item.nama.toLowerCase().includes(searchQuery.toLowerCase()) || item.kategori.toLowerCase().includes(searchCategory.toLowerCase())) && item.status == true)
+      ((item.nama.toLowerCase().includes(searchQuery.toLowerCase()) || item.kategori.toLowerCase().includes(searchCategory.toLowerCase())) && item.tersedia == true)
     );
 
     // const addToCart = (id: number) => {
