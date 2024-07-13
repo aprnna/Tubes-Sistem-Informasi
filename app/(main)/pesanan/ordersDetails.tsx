@@ -16,6 +16,7 @@ export const OrderDetails = (): JSX.Element => {
     
     const [nama, setNama] = useState("");
     const [jumlahOrang, setJumlahOrang] = useState(1);
+    const [noMeja, setNoMeja] = useState(1);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       updateDateTime(event.target.value);
@@ -27,6 +28,10 @@ export const OrderDetails = (): JSX.Element => {
 
     const handleChangeJumlahOrang = (event: React.ChangeEvent<HTMLInputElement>) => {
       setJumlahOrang(Number(event.target.value));
+    };
+
+    const handleChangeNoMeja = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setNoMeja(Number(event.target.value));
     };
 
     const handleBayar = () => {
@@ -48,11 +53,35 @@ export const OrderDetails = (): JSX.Element => {
 
       setLastID(newOrderId);
     }
+
+    async function sendOrder() {
+      const orderData = {
+            atasNama: nama,
+            banyak_orang: jumlahOrang,
+            no_meja: noMeja,
+            status: "ongoing",
+            total_harga: total,
+            id_users: "3fafcc48-9b54-4572-9122-3ddb4d46353c", //MASIH STATIC
+            items: cart.map(item => ({
+                id_menu: item.id,
+                jumlah: item.quantity
+            }))
+      };
+
+      const response = await fetchApi("/pesanan", "POST", orderData);
+
+        if (response.status === 200) {
+            handlerGetlastID();
+        } else {
+            console.error("Failed to send order", response);
+      }
+    }
     
     function handlerGetlastID(){
       setShowMainModal(false);
       setNama("");
       setJumlahOrang(1);
+      setNoMeja(1);
       emptyCart(cart);
       getLastId();
       alert("Cetak Nota Berhasil")
@@ -97,8 +126,12 @@ export const OrderDetails = (): JSX.Element => {
                       <h4>ID Kasir</h4>
                       <input disabled className="text-end bg-white font-medium" type="text" value={"KS345789"} />
                     </div>
+                    <div className="flex justify-between">
+                      <h4>No Meja</h4>
+                      <input className="text-end bg-white font-medium" type="number" value={noMeja} onChange={handleChangeNoMeja}/>
+                    </div>
                   </div>
-                  <div className="flex flex-col mt-2 min-h-48 max-h-48">
+                  <div className="flex flex-col mt-2 lg:min-h-40 lg:max-h-40 2xl:max-h-64">
                     <h1 className="font-bold text-2xl">Produk</h1>
                     <div className="overflow-auto">
                       {cart.map((item) => (
@@ -119,15 +152,15 @@ export const OrderDetails = (): JSX.Element => {
                   </div>
                 </div>
                 <div className="flex flex-col bg-white mr-12 py-6 px-6 drop-shadow-md shadow-inner gap-1 rounded-b-lg text-gray-600">
-                  <div className="flex justify-between">
+                  <div className="flex justify-between text-sm">
                     <h4>Sub Total</h4>
                     <h4 className="font-medium">{formatCurrency(subTotal)}</h4>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between text-sm">
                     <h4>Tax (5%)</h4>
                     <h4 className="font-medium">{formatCurrency(tax)}</h4>
                   </div>
-                  <div className="flex justify-between text-xl text-amber-900">
+                  <div className="flex justify-between text-amber-900">
                     <h4>Total</h4>
                     <h4 className="font-bold">{formatCurrency(total)}</h4>
                   </div>
@@ -213,7 +246,7 @@ export const OrderDetails = (): JSX.Element => {
               <div className="min-w-96 border-t-2 border-dashed border-gray-400 my-3" />
               <button 
                 className="bg-amber-950 text-slate-50 py-3 px-5 w-full rounded-lg mt-2 hover:bg-amber-900 transition-all duration-300"
-                onClick={() => handlerGetlastID()}
+                onClick={() => sendOrder()}
               >
                 Cetak Nota
               </button>

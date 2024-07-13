@@ -1,5 +1,6 @@
 import getResponse from '@/utils/getResponse'
 import { createClient } from '@/utils/supabase/server'
+import { Anybody } from 'next/font/google'
 import { NextRequest} from 'next/server'
 export async function GET() {
   const supabase = createClient()
@@ -11,7 +12,8 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
     const supabase = createClient()
-    const {atasNama, banyak_orang,no_meja, status, total_harga, id_users} = await req.json();
+
+    const {atasNama, banyak_orang,no_meja, status, total_harga, id_users, items} = await req.json();
     // const data = await req.formData()
     const { data: pesananBaru,error} = await supabase.from('pesanan').insert
     ([{
@@ -28,5 +30,24 @@ export async function POST(req: NextRequest) {
       getResponse(error, 'Pesanan Post failed', 400)
     }
 
-    return getResponse(pesananBaru, 'Pesanan created successfully', 201)
+    if (pesananBaru) {
+      const id_pesanan = pesananBaru[0].id;
+      
+      for (const item of items) {
+          const { id_menu, jumlah } = item;
+          const { data: itemPesanan, error: itemPesananError } = await supabase.from('item_pesanan').insert({
+              id_pesanan,
+              id_menu,
+              jumlah,
+          }).select();
+
+          if (itemPesananError) {
+              console.error('Item Pesanan Post failed', itemPesananError);
+
+              return getResponse(itemPesananError, 'Item Pesanan Post failed', 400);
+          }
+      }
+      
+      return getResponse(pesananBaru, 'Pesanan created successfully', 200);
+  }
 }
