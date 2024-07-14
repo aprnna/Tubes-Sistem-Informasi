@@ -1,10 +1,14 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { redirect } from 'next/navigation';
+import fetchApi from '@/utils/fetchApi';
 
 const TopContent = () : JSX.Element =>{
     const pathname = usePathname();
+    const [data, setData] = useState({nama:'', role: ''})
+    const [loading, setLoading] = useState(true)
 
     console.log(pathname);
 
@@ -14,8 +18,20 @@ const TopContent = () : JSX.Element =>{
         '/pesanan': 'Pesanan',
         '/pesanan/add': 'Menu',
         '/pesanan/ongoing': 'Pesanan Diproses',
-      };
+    };
 
+    async function getUser(){
+        const {data} = await fetchApi('/auth/current-user','GET')
+
+        if(!data) redirect('/auth/login')
+        setData(data)
+        setLoading(false)
+
+        return data
+    }
+    useEffect(()=>{
+        getUser()
+    },[])
     const currentTitle = pathTitles[pathname] || 'Menu';
 
     return(
@@ -29,8 +45,8 @@ const TopContent = () : JSX.Element =>{
             <div className='flex gap-4 items-center'>
                 <img alt="profile.png" className='max-h-12' src='../profile.png' />
                 <div className='text-lg'>
-                    <p className='text-red-300 font-bold'>Cashier</p>
-                    <p>Rahmat Gunawan</p>
+                    <p className='text-red-300 font-bold'>{loading? "Role":data.role}</p>
+                    <p>{loading?"Nama":data.nama }</p>
                 </div>
             </div>
         </div>
@@ -38,4 +54,4 @@ const TopContent = () : JSX.Element =>{
 
 }
 
-export default TopContent;
+export default TopContent;  
