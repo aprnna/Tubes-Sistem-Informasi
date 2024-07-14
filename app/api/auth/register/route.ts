@@ -14,8 +14,9 @@ export async function POST(req: NextRequest) {
   })
 
   if (error) {
-    getResponse(error, 'error login', 400)
-    redirect('/error')
+    console.error(error)
+
+    return getResponse(error, 'error login', 400)
   }
 
   const { error:errorInsert } = await supabase.from('users').upsert({
@@ -28,8 +29,9 @@ export async function POST(req: NextRequest) {
   })
 
   if(errorInsert) {
-    getResponse(errorInsert, 'error create new user', 400)
-    redirect('/error')
+    console.error(errorInsert)
+    
+    return getResponse(errorInsert, 'error create new user', 400)
   }
 
   return getResponse(dataAuth, 'success create new user', 200)
