@@ -1,85 +1,91 @@
-'use client'
-import { useCallback, useEffect, useState } from 'react'
-import { type User } from '@supabase/supabase-js'
+"use client";
+import { useCallback, useEffect, useState } from "react";
+import { type User } from "@supabase/supabase-js";
 
-import { createClient } from '@/utils/supabase/client'
-import { Button } from '@nextui-org/button'
-import { Input } from '@nextui-org/input'
+import { createClient } from "@/utils/supabase/client";
+import { Button } from "@nextui-org/button";
+import { Input } from "@nextui-org/input";
 
 export default function AccountForm({ user }: { user: User | null }) {
-  const supabase = createClient()
-  const [loading, setLoading] = useState(true)
-  const [fullname, setFullname] = useState<string | null>(null)
-  const [age, setAge] = useState<number | null>(null)
-  const [role, setRole] = useState<string | null>(null)
+  const supabase = createClient();
+  const [loading, setLoading] = useState(true);
+  const [fullname, setFullname] = useState<string | null>(null);
+  const [age, setAge] = useState<number | null>(null);
+  const [role, setRole] = useState<string | null>(null);
 
   const getProfile = useCallback(async () => {
     try {
-      setLoading(true)
+      setLoading(true);
 
       const { data, error, status } = await supabase
-        .from('users')
+        .from("users")
         .select(`full_name, age, role`)
-        .eq('id', user?.id)
-        .single()
+        .eq("id", user?.id)
+        .single();
 
       if (error && status !== 406) {
-        console.log(error)
-        throw error
+        console.log(error);
+        throw error;
       }
 
       if (data) {
-        setFullname(data.full_name)
-        setAge(data.age)
-        setRole(data.role)
+        setFullname(data.full_name);
+        setAge(data.age);
+        setRole(data.role);
       }
     } catch (error) {
-      alert('Error loading user data!')
+      alert("Error loading user data!");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }, [user, supabase])
+  }, [user, supabase]);
 
   useEffect(() => {
-    getProfile()
-  }, [user, getProfile])
+    getProfile();
+  }, [user, getProfile]);
 
   async function updateProfile({
     age,
     fullname,
   }: {
-    age: number | null
-    fullname: string | null
+    age: number | null;
+    fullname: string | null;
   }) {
     try {
-      setLoading(true)
+      setLoading(true);
 
-      const { error } = await supabase.from('users').upsert({
+      const { error } = await supabase.from("users").upsert({
         id: user?.id as string,
         full_name: fullname,
-        age:age,
+        age: age,
         updated_at: new Date().toISOString(),
-      })
+      });
 
-      if (error) throw error
-      alert('Profile updated!')
+      if (error) throw error;
+      alert("Profile updated!");
     } catch (error) {
-      alert('Error updating the data!')
+      alert("Error updating the data!");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
   return (
     <div className="form-widget">
       <div>
-        <Input disabled id="email" label="Email" type="text" value={user?.email} />
+        <Input
+          disabled
+          id="email"
+          label="Email"
+          type="text"
+          value={user?.email}
+        />
       </div>
       <div>
         <Input
           label="Full Name"
           type="text"
-          value={fullname || ''}
+          value={fullname || ""}
           onChange={(e) => setFullname(e.target.value)}
         />
       </div>
@@ -87,7 +93,7 @@ export default function AccountForm({ user }: { user: User | null }) {
         <Input
           label="Age"
           type="number"
-          value={age?.toString() || ''}
+          value={age?.toString() || ""}
           onChange={(e) => setAge(parseInt(e.target.value))}
         />
       </div>
@@ -96,7 +102,7 @@ export default function AccountForm({ user }: { user: User | null }) {
           disabled
           label="Role"
           type="text"
-          value={role || ''}
+          value={role || ""}
           onChange={(e) => setRole(e.target.value)}
         />
       </div>
@@ -104,21 +110,21 @@ export default function AccountForm({ user }: { user: User | null }) {
       <div>
         <Button
           className="button primary block"
-          color='primary'
+          color="primary"
           disabled={loading}
-          onClick={() => updateProfile({ fullname, age})}
+          onClick={() => updateProfile({ fullname, age })}
         >
-          {loading ? 'Loading ...' : 'Update'}
+          {loading ? "Loading ..." : "Update"}
         </Button>
       </div>
 
       <div>
         <form action="/api/auth/logout" method="post">
-          <Button className="button block" color='danger' type="submit">
+          <Button className="button block" color="danger" type="submit">
             Sign out
           </Button>
         </form>
       </div>
     </div>
-  )
+  );
 }

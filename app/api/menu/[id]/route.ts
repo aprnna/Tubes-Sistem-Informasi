@@ -34,7 +34,7 @@ export async function PUT(req:NextRequest,{params}:any) {
 export async function GET(req:NextRequest,{params}:any) {
   const supabase = createClient()
   const {id} = params
-  const {data, error} = await supabase.from('menu').select().eq('id',id)
+  const {data, error} = await supabase.from('menu').select().eq('id',id).single()
 
   if (error) return getResponse(error,"Failed get menu",400)
     
@@ -47,6 +47,6 @@ export async function DELETE(req:NextRequest,{params}:any) {
   const {data, error} = await supabase.from('menu').delete().eq('id',id)
 
   if (error) return getResponse(error,"Failed delete menu",400)
-    
+
   return getResponse(data, "Success Delete Menu",200)
 }
