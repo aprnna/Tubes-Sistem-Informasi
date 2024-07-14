@@ -42,7 +42,8 @@ export default function MenuCards(){
     };
 
     const filteredMenu = menu.filter((item:any) =>
-      (item.nama.toLowerCase().includes(searchQuery.toLowerCase()) || item.kategori.toLowerCase().includes(searchCategory.toLowerCase()))
+      // console.log(item)
+      ((item.nama.toLowerCase().includes(searchQuery.toLowerCase()) || item.kategori.toLowerCase().includes(searchCategory.toLowerCase())) && item.tersedia == true)
     );
 
     // const addToCart = (id: number) => {

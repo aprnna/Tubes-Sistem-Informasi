@@ -74,7 +74,7 @@ Licensed under the [MIT license](https://github.com/nextui-org/next-app-template
 - design pesanan diproses ✅
 - design detail pesanan diproses ✅
 - design crud menu ❌
-- design table menu ❌
+- design table menu ✅
 - batasan tampilan sidebar ✅
 
 ### Karyawan Gudang

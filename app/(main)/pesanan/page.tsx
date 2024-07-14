@@ -3,6 +3,7 @@ import TopContent from "@/components/top-content";
 import TablePesanan from "./tablePesanan";
 import { CartProvider } from "./allContext";
 import SearchBar from "@/components/searchBar";
+import Head from "@/components/head";
 // import Sidebar from "@/components/sidebar";
 
 export default function AboutPage() {
@@ -10,6 +11,7 @@ export default function AboutPage() {
     <div className="w-full h-screen bg-slate-50 flex flex-col">
         <TopContent/>
         <CartProvider>
+          {/* <Head/> */}
           <SearchBar/>
           <TablePesanan/>
         </CartProvider>
