@@ -7,8 +7,8 @@ import fetchApi from "@/utils/fetchApi";
 export default function RegisterPage() {
   const roles = [
     {
-      label: "Pelayan",
-      value: "pelayan",
+      label: "Karyawan",
+      value: "karyawan",
     },
     {
       label: "Koki",

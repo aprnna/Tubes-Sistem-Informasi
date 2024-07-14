@@ -34,9 +34,12 @@ export async function POST(req: NextRequest) {
     case 'koki':
       redirect('/menu')
       break;
+    case 'karyawan':
+      redirect('/bahan_baku')
+      break;
     default:
       // revalidatePath('/', 'layout')
-      redirect('/blog')
+      redirect('/error')
       break;
   }
  
