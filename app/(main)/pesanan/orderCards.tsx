@@ -123,7 +123,7 @@ export default function OrderCards() {
 
     return (
         <div className="flex overflow-hidden">
-        <div className={`flex flex-wrap items-center justify-evenly p-12 gap-6 ${loading ? 'w-full' : 'w-auto'} overflow-auto`}>
+        <div className={`flex flex-wrap items-center justify-evenly px-12 py-12 gap-6 ${loading ? 'w-full' : 'w-auto'} overflow-auto`}>
             {loading ? (
                 <div className="flex flex-col items-center justify-center p-10 w-full h-full">
                     <img alt="Loading..." className="max-w-14" src="/loading1.gif" />
@@ -160,7 +160,7 @@ export default function OrderCards() {
             ) : (
                 orderData && (
                     <div className="flex flex-col drop-shadow-lg h-full">
-                    <div className="bg-white mt-12 mr-12 items-center min-w-[512px] justify-center rounded-t-lg py-4 px-6">
+                    <div className="bg-white mt-2 mr-12 items-center min-w-[512px] justify-center rounded-t-lg py-4 px-6">
                     <h1 className="font-bold text-2xl">Detail Pesanan</h1>
                     <div className="flex flex-col gap-1 pt-1.5 text-sm text-gray-600">
                         <div className="flex justify-between">

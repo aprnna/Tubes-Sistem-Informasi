@@ -131,7 +131,7 @@ export const OrderDetails = (): JSX.Element => {
                       <input className="text-end bg-white font-medium" type="number" value={noMeja} onChange={handleChangeNoMeja}/>
                     </div>
                   </div>
-                  <div className="flex flex-col mt-2 lg:min-h-40 lg:max-h-40 2xl:max-h-64">
+                  <div className="flex flex-col mt-2 lg:min-h-28 lg:max-h-20 2xl:max-h-64">
                     <h1 className="font-bold text-2xl">Produk</h1>
                     <div className="overflow-auto">
                       {cart.map((item) => (

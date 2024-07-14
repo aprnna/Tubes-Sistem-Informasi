@@ -1,8 +1,5 @@
-// import { fetchLastOrderId } from '@/utils/getLastOrderId'
 import getResponse from '@/utils/getResponse'
 import { createClient } from '@/utils/supabase/server'
-// import { createClient } from '@/utils/supabase/server'
-import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET() {
     const supabase = createClient()
