@@ -1,6 +1,6 @@
 import { title } from "@/components/primitives";
 
-export default function PermissionPage() {
+export default function Page() {
   return (
     <div>
       <h1 className={title()}>Can&apos;t Access This Page</h1>
