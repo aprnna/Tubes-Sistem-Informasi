@@ -14,7 +14,8 @@ export async function POST(req: NextRequest) {
   const { data:dataUpload, error:errUpload } = await supabase.storage.from('menu').upload(`${data.get("nama")}`, data.get('foto') as File)
   
   if (errUpload) {
-    await supabase.storage.from('menu').remove([`${dataUpload?.path}`])
+    await supabase.storage.from('menu').remove([`${(dataUpload as any)?.path}`])
+    
     return getResponse(errUpload, 'Failed to upload image', 400)
   }
 
