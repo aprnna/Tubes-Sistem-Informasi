@@ -50,3 +50,17 @@ export async function DELETE(req:NextRequest,{params}:any) {
 
   return getResponse(data, "Success Delete Menu",200)
 }
+
+export async function PATCH(req:NextRequest,{params}:any) {
+  const supabase = createClient()
+  const {id} = params
+  const newData = await req.json()
+
+  const {data:updateData, error} = await supabase.from("menu").update({
+    tersedia:newData.tersedia
+    }).eq('id',id).select()
+
+    if (error) return getResponse(error,"Failed update menu",400)
+
+      return getResponse(updateData, "Success Update Menu",200)
+}

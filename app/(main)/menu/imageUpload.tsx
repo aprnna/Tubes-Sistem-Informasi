@@ -3,7 +3,10 @@
 import React, { useState, useCallback } from 'react';
 import { useDropzone, DropzoneOptions } from 'react-dropzone';
 
-const ImageUpload: React.FC = () => {
+interface ImageUploadProps {
+  onFileDrop: (file: File) => void;
+}
+const ImageUpload: React.FC<ImageUploadProps>= ({onFileDrop}) => {
   const [imageSrc, setImageSrc] = useState<string | null>(null);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -18,15 +21,16 @@ const ImageUpload: React.FC = () => {
         }
       };
       reader.readAsDataURL(file);
+      onFileDrop(file);
     }
-  }, []);
+  }, [onFileDrop]);
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop, accept: ['image/jpeg', 'image/png'] as unknown as DropzoneOptions['accept']});
 
   return (
     <div className="flex w-1/2 border-slate-200 text-base font-normal border rounded-lg">
     <div {...getRootProps()} className="flex justify-center items-center w-[400px] h-[400px] cursor-pointer hover:bg-slate-50">
-      <input {...getInputProps()} />
+      <input {...getInputProps()} name='foto'/>
       {imageSrc ? (
         <img
           alt="Uploaded"

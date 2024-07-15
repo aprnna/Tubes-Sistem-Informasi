@@ -10,8 +10,9 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   const supabase = createClient()
-  const data = await req.formData()
-  const { data:dataUpload, error:errUpload } = await supabase.storage.from('menu').upload(`${data.get("nama")}`, data.get('foto') as File)
+  const {nama, harga, deskripsi, kategori, tersedia, foto} = await req.json();
+  
+  const { data:dataUpload, error:errUpload } = await supabase.storage.from('menu').upload(`${nama}`, foto as Blob)
   
   if (errUpload) {
     await supabase.storage.from('menu').remove([`${(dataUpload as any)?.path}`])
@@ -21,11 +22,11 @@ export async function POST(req: NextRequest) {
 
   const { data:dataImg } = await supabase.storage.from('menu').getPublicUrl(`${dataUpload.path}`)
   const { data: menu, error } = await supabase.from('menu').insert([{
-    nama: data.get('nama'),
-    harga: data.get('harga'),
-    deskripsi: data.get('deskripsi'),
-    kategori: data.get('kategori'),
-    tersedia: data.get('tersedia'),
+    nama: nama as string,
+    harga: harga,
+    deskripsi: deskripsi as string,
+    kategori: kategori as string,
+    tersedia: tersedia as boolean,
     foto:dataImg.publicUrl
   }]).select()
 
