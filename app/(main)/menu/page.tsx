@@ -9,7 +9,7 @@ export default function AboutPage() {
     <div className="w-full h-screen bg-slate-50 flex flex-col">
         <TopContent />
         {/* <TableMenu /> */}
-        <Head tambahButton={true}/>
+        <Head/>
         <div className="flex overflow-hidden">
           <div className="flex-1  flex flex-row overflow-auto">
             <TableMenu/>
