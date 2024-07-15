@@ -1,7 +1,8 @@
 
 import { title } from "@/components/primitives";
 import { createClient } from "@/utils/supabase/server";
-import Layout from "./(main)/layout";
+import Layout from "./(main)/Layout.1";
+import { redirect } from "next/navigation";
 async function getUser() {
   const supabase = createClient();
   
@@ -15,6 +16,8 @@ async function getUser() {
 
 export default async function Home() {
   const user = await getUser();
+
+  return redirect('auth/login')
   
   return (
     <Layout>

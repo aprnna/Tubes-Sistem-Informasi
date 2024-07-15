@@ -17,8 +17,30 @@ export async function POST(req: NextRequest) {
   if (error) {
     redirect('/error')
   }
-  getResponse(dataAuth, 'success login', 200)
-  revalidatePath('/', 'layout')
-  redirect('/')
-  
+  const {data:dataUser, error:errorDataUser} = await supabase.from('users').select().eq('id', dataAuth.user.id).single()
+
+  if (errorDataUser) {
+    redirect('/error')
+  }
+  console.log(dataUser)
+  getResponse(dataUser, 'success login', 200)
+  switch (dataUser.role) {
+    case 'manager':
+      redirect('/admin')
+      break;
+    case 'kasir':
+      redirect ('/pesanan')
+      break;
+    case 'koki':
+      redirect('/menu')
+      break;
+    case 'karyawan':
+      redirect('/bahan_baku')
+      break;
+    default:
+      // revalidatePath('/', 'layout')
+      redirect('/error')
+      break;
+  }
+ 
 }

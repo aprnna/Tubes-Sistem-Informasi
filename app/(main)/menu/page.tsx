@@ -1,23 +1,20 @@
-import { title } from "@/components/primitives";
 // import Sidebar from "@/components/sidebar";
-import TableMenu from "./TableMenu"; // Import the client-side component
 import TopContent from "@/components/top-content";
-import MenuCards from "./menuCards";
-import { OrderDetails } from "./ordersDetails";
+import TableMenu from "./TableMenu";
+import Head from "@/components/head";
 
 export default function AboutPage() {
+  
   return (
     <div className="w-full h-screen bg-slate-50 flex flex-col">
-      <TopContent />
-      {/* <TableMenu /> */}
-      <div className="flex overflow-y-auto">
-        <div className="flex-1  flex flex-row">
-          <MenuCards />
+        <TopContent />
+        {/* <TableMenu /> */}
+        <Head tambahButton={true}/>
+        <div className="flex overflow-hidden">
+          <div className="flex-1  flex flex-row overflow-auto">
+            <TableMenu/>
+          </div>
         </div>
-        <div className="flex flex-col">
-          <OrderDetails/>
-        </div>
-      </div>
     </div>
   );
 }
