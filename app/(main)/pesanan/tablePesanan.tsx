@@ -8,7 +8,7 @@ export default function TablePesanan() {
   const [pesanan, setMenu] = useState([]);
   const [loading, setLoading] = useState(true);
   const {searchQuery} = useCart();
-  const [showMenuModal, setShowMenuModal] = useState(false);
+  // const [showMenuModal, setShowMenuModal] = useState(false);
 
   async function getMenu() {
     setLoading(true);

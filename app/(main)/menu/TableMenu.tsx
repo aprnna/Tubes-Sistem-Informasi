@@ -4,6 +4,7 @@ import fetchApi from "@/utils/fetchApi";
 import Table from "@/components/table";
 import Modal from "@/components/modal";
 import ImageUpload from "./imageUpload";
+import { pages } from "next/dist/build/templates/app-page";
 
 interface Menu {
   id: number;
@@ -29,6 +30,7 @@ export default function TableMenu() {
   const [categories, setCategories] = useState<string[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [idMenu, setIdMenu] = useState(0);
   
 
   async function getMenu() {
@@ -94,14 +96,32 @@ export default function TableMenu() {
     getCategories();
   };
 
+  const deleteMenu = async (id: number) => {
+    const {data: dataMenu, error} = await fetchApi(`/menu/${id}`, 'DELETE')
+
+    if (error) {
+      console.log(error, dataMenu);
+      alert(`Menu ${namaMenu} Gagal Dihapus`)
+    }
+      
+    
+    alert(`Menu ${namaMenu} berhasil dihapus`)
+    setShowDeleteModal(false);
+    window.location.reload();
+  }
+
   const handleDelete = (id:number) => {
     console.log("Delete item with id:", id);
     setShowDeleteModal(true);
     const menuToEdit = menu.find((item:any) => item.id === id);
 
     setNamaMenu(menuToEdit!.nama);
-
+    setIdMenu(id);
   };
+  
+  const handleDeteleButton = () => {
+    deleteMenu(idMenu);
+  }
 
   useEffect(() => {
     getMenu();
@@ -290,7 +310,7 @@ export default function TableMenu() {
                   </button>
                   <button 
                     className="bg-amber-950 text-slate-50 py-3 px-8 w-full rounded-lg mt-8 hover:bg-amber-900 transition-all duration-300"
-                    onClick={()=> setShowDeleteModal(false)}
+                    onClick={()=> handleDeteleButton()}
                   >
                     Hapus
                   </button>
