@@ -16,7 +16,9 @@ export async function middleware(req: NextRequest) {
   }
 
   const supabase = createClient();
-  const {data:{user}} = await supabase.auth.getUser()
+  const {data:{user}, error:errorAuth} = await supabase.auth.getUser()
+
+  if (errorAuth ) return NextResponse.redirect(new URL('/auth/login', req.url));
   const { data, error} = await supabase.from('users').select('role').eq('id', user?.id).single()
   const role = data?.role
 

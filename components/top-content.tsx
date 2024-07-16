@@ -43,9 +43,9 @@ const TopContent = (): JSX.Element => {
         <img alt="profile.png" className="max-h-12" src="../profile.png" />
         <div className="text-lg">
           <p className="text-red-300 font-bold">
-            {loading ? "Role" : data.role}
+            {loading ? "Role" : data?.role}
           </p>
-          <p>{loading ? "Nama" : data.nama}</p>
+          <p>{loading ? "Nama" : data?.nama}</p>
         </div>
       </div>
     </div>
