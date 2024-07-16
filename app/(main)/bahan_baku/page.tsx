@@ -1,16 +1,23 @@
-import { title } from "@/components/primitives";
 import TopContent from "@/components/top-content";
-import { CartProvider } from "../pesanan/allContext";
 import SearchBar from "@/components/searchBar";
-// import Sidebar from "@/components/sidebar";
+import Head from "@/components/head";
+import TableBahan from "./TableBahan";
+import { Button } from "@/components/Button";
 
-export default function AboutPage() {
+export default function Page() {
   return (
     <div className="w-full h-screen bg-slate-50 flex flex-col">
-        <TopContent/>
-        <CartProvider>
-          <SearchBar/>
-        </CartProvider>
+      <TopContent />
+      <Head>
+        <Button>Riwayat Bahan Baku</Button>
+        <Button>Tambah Bahan Baku</Button>
+      </Head>
+      {/* <SearchBar /> */}
+      <div className="flex overflow-hidden">
+        <div className="flex-1  flex flex-row overflow-auto">
+          <TableBahan />
+        </div>
+      </div>
     </div>
   );
 }

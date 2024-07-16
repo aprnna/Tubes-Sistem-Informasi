@@ -10,6 +10,7 @@ export async function middleware(req: NextRequest) {
   // Allow requests to /api and /login to pass through
   const allowedPaths = ['/error/unauthorized','/error'];
 
+  if (pathname == '/') return NextResponse.redirect(new URL('/auth/login', req.url));
   if (pathname.startsWith('/api') || pathname.startsWith('/auth') || allowedPaths.includes(pathname)) {
 
     return NextResponse.next();

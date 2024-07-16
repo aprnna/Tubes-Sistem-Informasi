@@ -4,15 +4,15 @@ import fetchApi from "@/utils/fetchApi";
 import Table from "@/components/table";
 import { Loading } from "@/components/loading";
 
-export default function TableMenu() {
-  const [menu, setMenu] = useState([]);
+export default function TableBahan() {
+  const [bahan, setBahan] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  async function getMenu() {
+  async function getBahan() {
     setLoading(true);
-    const { data } = await fetchApi("/menu", "GET");
+    const { data } = await fetchApi("/bahan", "GET");
 
-    setMenu(data);
+    setBahan(data);
     setLoading(false);
   }
 
@@ -27,14 +27,13 @@ export default function TableMenu() {
   };
 
   useEffect(() => {
-    getMenu();
+    getBahan();
   }, []);
 
   const columns = [
-    { key: "nama", label: "Nama Makanan" },
-    { key: "harga", label: "Harga" },
-    { key: "kategori", label: "Kategori" },
-    { key: "tersedia", label: "Tersedia" },
+    { key: "nama", label: "Nama Bahan" },
+    { key: "jumlah", label: "Jumlah" },
+    { key: "satuan", label: "Satuan" },
     { key: "action", label: "Action" },
   ];
 
@@ -46,7 +45,7 @@ export default function TableMenu() {
       ) : (
         <Table
           columns={columns}
-          data={menu}
+          data={bahan}
           onDelete={handleDelete}
           onEdit={handleEdit}
         />
