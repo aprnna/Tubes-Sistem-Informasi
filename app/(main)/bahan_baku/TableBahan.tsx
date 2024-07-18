@@ -7,11 +7,25 @@ import { toast } from "react-toastify";
 import Modal from "@/components/modal2";
 import FormBahan from "./formBahan";
 import { useDisclosure } from "@nextui-org/modal";
+
+interface EditData {
+  id: number;
+  nama: string;
+  jumlah: number;
+  satuan: string;
+}
+
 export default function TableBahan({ querySearch }: any) {
   const [bahan, setBahan] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadingUpdate, setLoadingUpdate] = useState(false);
-  const [editData, setEditData] = useState({});
+
+  const [editData, setEditData] = useState<EditData>({
+    id: 0,
+    nama: "",
+    jumlah: 0,
+    satuan: "",
+  });
   const [searchData, setSearchData] = useState([]);
   const modal = useDisclosure();
 
