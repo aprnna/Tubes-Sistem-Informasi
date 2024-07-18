@@ -10,6 +10,7 @@ import { useDisclosure } from "@nextui-org/modal";
 export default function TableBahan({ querySearch }: any) {
   const [bahan, setBahan] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadingUpdate, setLoadingUpdate] = useState(false);
   const [editData, setEditData] = useState({});
   const [searchData, setSearchData] = useState([]);
   const modal = useDisclosure();
@@ -28,7 +29,23 @@ export default function TableBahan({ querySearch }: any) {
 
     if (data) setEditData(data);
     modal.onOpen();
-    const response = await fetchApi(`/bahan/${id}`, "GET");
+  };
+
+  const handleEditSubmit = async (e: any) => {
+    e.preventDefault();
+    setLoadingUpdate(true);
+    const formData = new FormData(e.target);
+    const dataUpdate = {
+      nama: formData.get("nama"),
+      jumlah: formData.get("jumlah"),
+      satuan: formData.get("satuan"),
+    };
+    const response = await fetchApi(`/bahan/${editData.id}`, "PUT", dataUpdate);
+
+    if (response.status == 200) toast.success("Berhasil mengedit bahan baku");
+    else toast.error("Gagal mengedit bahan baku");
+    setLoadingUpdate(false);
+    window.location.reload();
   };
 
   const handleDelete = async (id: number) => {
@@ -39,6 +56,7 @@ export default function TableBahan({ querySearch }: any) {
       success: "Berhasil menghapus bahan baku",
       error: "Gagal menghapus bahan baku",
     });
+
     window.location.reload();
   };
 
@@ -77,8 +95,8 @@ export default function TableBahan({ querySearch }: any) {
           <Modal
             btnActionTitle="Edit Bahan Baku"
             isOpen={modal.isOpen}
-            loading={loading}
-            submit={handleEdit}
+            loading={loadingUpdate}
+            submit={handleEditSubmit}
             title="Edit Bahan Baku"
             onOpenChange={modal.onOpenChange}
             sizeModal="xl"

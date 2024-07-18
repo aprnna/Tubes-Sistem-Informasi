@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
   }
   const { error:err } = await supabase.from('mengelola_bahan').insert({
     jumlah: jumlah,
-    id_users: user?.id,
+    id_user: user?.id,
     id_stock: bahan_baku?.id,
     proses:'Create'
   }).select()
