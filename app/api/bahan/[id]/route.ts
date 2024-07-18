@@ -8,11 +8,24 @@ export async function PUT(req:NextRequest,{params}:any) {
   const {
     nama, jumlah, satuan
   } = await req.json();
-  const { data: updateData, error } = await supabase.from('bahan_baku').update([{
+  const {data:{user}, error:errorAuth} = await supabase.auth.getUser()
+
+  if (errorAuth) return getResponse(errorAuth, 'error get user', 500)
+  const { data: updateData, error }:{data:any, error:any} = await supabase.from('bahan_baku').update([{
     nama: nama,
     jumlah: jumlah,
     satuan: satuan,
   }]).eq('id',id).select()
+
+  const { error:err } = await supabase.from('mengelola_bahan').insert({
+    jumlah: updateData.jumlah,
+    id_users: user?.id,
+    id_stock: id,
+    proses:'Edit'
+  }).select()
+
+  if(err) return getResponse(err,"Failed update bahan baku",400)
+
 
   if (error) return getResponse(error,"Failed update bahan baku",400)
 
@@ -32,9 +45,20 @@ export async function GET(req:NextRequest,{params}:any) {
 export async function DELETE(req:NextRequest,{params}:any) {
   const supabase = createClient()
   const {id} = params
-  const {data, error} = await supabase.from('bahan_baku').delete().eq('id',id)
+  const {data:{user}, error:errorAuth} = await supabase.auth.getUser()
+
+  if (errorAuth) return getResponse(errorAuth, 'error get user', 500)
+  const {data, error}:{data:any, error:any} = await supabase.from('bahan_baku').update({status:'FALSE'}).eq('id',id).select().single()
 
   if (error) return getResponse(error,"Failed delete bahan baku",400)
-    
+  const { error:err } = await supabase.from('mengelola_bahan').insert({
+    jumlah: data.jumlah,
+    id_users: user?.id,
+    id_stock: data.id,
+    proses:'Delete'
+  }).select()
+
+  if(err) return getResponse(err,"Failed delete bahan baku",400)
+
   return getResponse(data, "Success Delete bahan baku",200)
 }

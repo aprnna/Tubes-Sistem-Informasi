@@ -1,20 +1,16 @@
-// import Sidebar from "@/components/sidebar";
+"use client";
 import TopContent from "@/components/top-content";
-import TableMenu from "./TableMenu";
+import TableRiwayatBahan from "./TableRiwayatBahan";
 import Head from "@/components/head";
-import { Button } from "@/components/Button";
 
-export default function AboutPage() {
+export default function Page() {
   return (
     <div className="w-full h-screen bg-slate-50 flex flex-col">
       <TopContent />
-      {/* <TableMenu /> */}
-      <Head>
-        <Button>Tambah Menu</Button>
-      </Head>
+      <Head />
       <div className="flex overflow-hidden">
         <div className="flex-1  flex flex-row overflow-auto">
-          <TableMenu />
+          <TableRiwayatBahan />
         </div>
       </div>
     </div>

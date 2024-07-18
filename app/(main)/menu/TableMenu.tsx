@@ -2,26 +2,26 @@
 import { useEffect, useState } from "react";
 import fetchApi from "@/utils/fetchApi";
 import Table from "@/components/table";
+import { Loading } from "@/components/loading";
 
 export default function TableMenu() {
   const [menu, setMenu] = useState([]);
   const [loading, setLoading] = useState(true);
-  
 
   async function getMenu() {
     setLoading(true);
-    const {data} = await fetchApi("/menu", "GET");
+    const { data } = await fetchApi("/menu", "GET");
 
     setMenu(data);
     setLoading(false);
   }
 
-  const handleEdit = (id:number) => {
+  const handleEdit = (id: number) => {
     console.log("Edit item with id:", id);
     // Tambahkan logika untuk mengedit item
   };
 
-  const handleDelete = (id:number) => {
+  const handleDelete = (id: number) => {
     console.log("Delete item with id:", id);
     // Tambahkan logika untuk menghapus item
   };
@@ -42,12 +42,14 @@ export default function TableMenu() {
     <div className="w-full h-auto">
       {/* <h1 className="text-2xl font-bold">Menu</h1> */}
       {loading ? (
-        <div className="flex flex-col items-center h-auto p-10">
-          <img alt="Loading..." className="max-w-14" src="/loading1.gif" />
-          <p>Loading...</p>
-        </div>
+        <Loading />
       ) : (
-        <Table columns={columns} data={menu} onDelete={handleDelete} onEdit={handleEdit}/>
+        <Table
+          columns={columns}
+          data={menu}
+          onDelete={handleDelete}
+          onEdit={handleEdit}
+        />
       )}
     </div>
   );

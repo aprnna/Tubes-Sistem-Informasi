@@ -4,8 +4,10 @@ import clsx from "clsx";
 
 import { Providers } from "./providers";
 
+import "react-toastify/dist/ReactToastify.css";
 import { siteConfig } from "@/config/site";
-import { fontSans, fontJakarta } from "@/config/fonts";
+import { fontJakarta } from "@/config/fonts";
+import { ToastContainer } from "react-toastify";
 
 export const metadata: Metadata = {
   title: {
@@ -36,11 +38,12 @@ export default function RootLayout({
       <body
         className={clsx(
           "min-h-screen bg-background font-jakarta antialiased",
-          fontJakarta.variable,
+          fontJakarta.variable
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
           {children}
+          <ToastContainer position="bottom-right" />
         </Providers>
       </body>
     </html>
