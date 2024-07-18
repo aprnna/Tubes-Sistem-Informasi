@@ -54,10 +54,9 @@ After modifying the `.npmrc` file, you need to run `pnpm install` again to ensur
 
 Licensed under the [MIT license](https://github.com/nextui-org/next-app-template/blob/main/LICENSE).
 
-
 # Progress
 
-## Design 
+## Design
 
 ### Kasir
 
@@ -68,7 +67,6 @@ Licensed under the [MIT license](https://github.com/nextui-org/next-app-template
 - design pencarian ✅
 - batasan tampilan sidebar ✅
 
-
 ### Koki
 
 - design pesanan diproses ✅
@@ -78,44 +76,42 @@ Licensed under the [MIT license](https://github.com/nextui-org/next-app-template
 - batasan tampilan sidebar ✅
 
 ### Karyawan Gudang
-- design table bahan baku ❌
-- design crud bahan baku ❌
-- design riwayat bahan baku ❌
+
+- design table bahan baku ✅
+- design crud bahan baku ✅
+- design riwayat bahan baku ✅
 - design pencarian ✅
 - batasan tampilan sidebar ✅
 
 ### Manager
+
 - design laporan ❌
-
-
-
 
 ## Fungsi
 
 ### Kasir
+
 - post pesanan & item_pesanan 9️0% tinggal id_usernya masih static karena belom ambil data dari login
 - get pesanan ✅
 - fungsi pencarian ✅
-- hak akses ❌
-
+- hak akses ✅
 
 ### Koki
+
 - update status menjadi selesai ✅
 - get pesanan ongoing ✅
 - post menu ❌
 - update menu ❌
 - update ketersediaan menu ❌
-- hak akses ❌
+- hak akses ✅
 
 ### Karyawan Gudang
-- get bahan baku ❌
-- get riwayat bahan baku ❌
-- post bahan baku ❌
-- update bahan baku ❌
-- fungsi pencarian ❌
-- hak akses ❌
+
+- get bahan baku ✅
+- get riwayat bahan baku ✅
+- post bahan baku ✅
+- update bahan baku ✅
+- fungsi pencarian ✅
+- hak akses ✅
 
 ### Manager
-
-
-

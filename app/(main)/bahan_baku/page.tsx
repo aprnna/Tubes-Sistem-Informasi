@@ -11,10 +11,12 @@ import { Input } from "@nextui-org/input";
 import FormBahan from "./formBahan";
 import fetchApi from "@/utils/fetchApi";
 import { toast } from "react-toastify";
+import SearchBar2 from "@/components/SearchBar2";
 
 export default function Page() {
   const modal = useDisclosure();
   const [loading, setLoading] = useState(false);
+  const [querySearch, setQuerySearch] = useState("");
 
   async function handleSubmit(e: any) {
     e.preventDefault();
@@ -40,7 +42,9 @@ export default function Page() {
     <div className="w-full h-screen bg-slate-50 flex flex-col">
       <TopContent />
       <Head>
-        <Button>Riwayat Bahan Baku</Button>
+        <Button as={"a"} href="/bahan_baku/riwayat">
+          Riwayat Bahan Baku
+        </Button>
         <Button onPress={modal.onOpen}>Tambah Bahan Baku</Button>
       </Head>
       <Modal
@@ -54,10 +58,10 @@ export default function Page() {
       >
         <FormBahan />
       </Modal>
-      {/* <SearchBar /> */}
+      <SearchBar2 setSearchQuery={setQuerySearch} />
       <div className="flex overflow-hidden">
         <div className="flex-1  flex flex-row overflow-auto">
-          <TableBahan />
+          <TableBahan querySearch={querySearch} />
         </div>
       </div>
     </div>

@@ -28,7 +28,7 @@ export async function middleware(req: NextRequest) {
     manager: ['/admin'],
     kasir: ['/pesanan/add', '/pesanan'],
     koki: ['/menu','/pesanan/ongoing'],
-    karyawan: ['/bahan_baku'],
+    karyawan: ['/bahan_baku','/bahan_baku/riwayat'],
   };
 
   if(role){

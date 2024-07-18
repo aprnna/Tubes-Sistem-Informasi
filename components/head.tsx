@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { usePathname } from "next/navigation";
 
 interface HeadProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export default function Head({ children }: HeadProps) {
@@ -19,6 +19,7 @@ export default function Head({ children }: HeadProps) {
     "/pesanan/add": "Menu",
     "/pesanan/ongoing": "Pesanan Diproses",
     "/bahan_baku": "Bahan Baku",
+    "/bahan_baku/riwayat": "Riwayat Bahan Baku",
   };
 
   const currentTitle = pathTitles[pathname] || "Menu";
