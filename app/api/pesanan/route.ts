@@ -12,7 +12,9 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
     const supabase = createClient()
+    const {data:{user}, error:errorAuth} = await supabase.auth.getUser()
 
+    if(errorAuth) return getResponse(errorAuth,"failed to get user data", 400)
     const {atasNama, banyak_orang,no_meja, status, total_harga, id_users, items} = await req.json();
     // const data = await req.formData()
     const { data: pesananBaru,error} = await supabase.from('pesanan').insert
@@ -22,7 +24,7 @@ export async function POST(req: NextRequest) {
         no_meja: no_meja,
         status: status,
         total_harga: total_harga,
-        id_users: id_users,
+        id_users: user?.id,
     }]).select()
 
     if (error) {
