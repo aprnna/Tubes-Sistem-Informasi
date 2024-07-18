@@ -23,9 +23,7 @@ export async function POST(req: NextRequest) {
   const { data: menu, error } = await supabase.from('menu').insert([{
     nama: data.get('nama'),
     harga: data.get('harga'),
-    deskripsi: data.get('deskripsi'),
     kategori: data.get('kategori'),
-    tersedia: data.get('tersedia'),
     foto:dataImg.publicUrl
   }]).select()
 

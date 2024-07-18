@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import ToggleSwitch from "@/components/toggleSwitch";
-
+import fetchApi from "@/utils/fetchApi";
+import { toast } from "react-toastify";
 interface Column {
   key: string;
   label: string;
@@ -45,10 +46,16 @@ function formatToDateTimeLocal(timestamp: string) {
 
 const Table: React.FC<TableProps> = ({ columns, data, onEdit, onDelete }) => {
   const [statuses, setStatuses] = useState(data.map((item) => item.tersedia));
-
-  const handleToggle = (index: number) => {
+  const handleToggle = async (index: number, dataId: any) => {
     const newStatuses = [...statuses];
-
+    const response = await toast.promise(
+      fetchApi(`/menu/change-status/${dataId}`, "PUT"),
+      {
+        pending: "Change status menu...",
+        success: "Berhasil mengubah status",
+        error: "Gagal mengubah status",
+      }
+    );
     newStatuses[index] = !newStatuses[index];
     setStatuses(newStatuses);
   };
@@ -129,7 +136,7 @@ const Table: React.FC<TableProps> = ({ columns, data, onEdit, onDelete }) => {
                   ) : column.key === "tersedia" ? (
                     <ToggleSwitch
                       initialChecked={statuses[rowIndex]}
-                      onChange={() => handleToggle(rowIndex)}
+                      onChange={() => handleToggle(rowIndex, row.id)}
                     />
                   ) : (
                     row[column.key]

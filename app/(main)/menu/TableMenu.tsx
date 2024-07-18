@@ -3,10 +3,14 @@ import { useEffect, useState } from "react";
 import fetchApi from "@/utils/fetchApi";
 import Table from "@/components/table";
 import { Loading } from "@/components/loading";
-
+import { toast } from "react-toastify";
+import Modal from "@/components/modal2";
+import { useDisclosure } from "@nextui-org/modal";
 export default function TableMenu() {
   const [menu, setMenu] = useState([]);
   const [loading, setLoading] = useState(true);
+  const modal = useDisclosure();
+  const [idMenu, setIdMenu] = useState(0);
 
   async function getMenu() {
     setLoading(true);
@@ -21,9 +25,25 @@ export default function TableMenu() {
     // Tambahkan logika untuk mengedit item
   };
 
-  const handleDelete = (id: number) => {
+  const handleDelete = async (id: number) => {
     console.log("Delete item with id:", id);
-    // Tambahkan logika untuk menghapus item
+    setIdMenu(id);
+    modal.onOpen();
+  };
+
+  const handleDeleteSubmit = async (e: any) => {
+    e.preventDefault();
+    const response = await toast.promise(
+      fetchApi(`/menu/${idMenu}`, "DELETE"),
+      {
+        pending: "Delete Menu...",
+        success: "Berhasil menghapus Menu",
+        error: "Gagal menghapus Menu",
+      }
+    );
+
+    modal.onClose();
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -51,6 +71,15 @@ export default function TableMenu() {
           onEdit={handleEdit}
         />
       )}
+      <Modal
+        isOpen={modal.isOpen}
+        onOpenChange={modal.onOpenChange}
+        btnActionTitle="Delete"
+        title="Delete Menu"
+        submit={handleDeleteSubmit}
+      >
+        <h1>Are you sure want to delete this menu?</h1>
+      </Modal>
     </div>
   );
 }

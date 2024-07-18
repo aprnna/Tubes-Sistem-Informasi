@@ -100,9 +100,9 @@ Licensed under the [MIT license](https://github.com/nextui-org/next-app-template
 
 - update status menjadi selesai ✅
 - get pesanan ongoing ✅
-- post menu ❌
+- post menu ✅
 - update menu ❌
-- update ketersediaan menu ❌
+- update ketersediaan menu ✅
 - hak akses ✅
 
 ### Karyawan Gudang

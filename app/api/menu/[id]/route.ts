@@ -45,7 +45,7 @@ export async function DELETE(req:NextRequest,{params}:any) {
   const supabase = createClient()
   const {id} = params
   const {data, error} = await supabase.from('menu').delete().eq('id',id)
-
+  console.log(data)
   if (error) return getResponse(error,"Failed delete menu",400)
 
   return getResponse(data, "Success Delete Menu",200)
