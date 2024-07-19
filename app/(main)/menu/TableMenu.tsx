@@ -9,6 +9,7 @@ import { useDisclosure } from "@nextui-org/modal";
 export default function TableMenu() {
   const [menu, setMenu] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadingDelete, setLoadingDelete] = useState(false);
   const modal = useDisclosure();
   const [idMenu, setIdMenu] = useState(0);
 
@@ -33,15 +34,12 @@ export default function TableMenu() {
 
   const handleDeleteSubmit = async (e: any) => {
     e.preventDefault();
-    const response = await toast.promise(
-      fetchApi(`/menu/${idMenu}`, "DELETE"),
-      {
-        pending: "Delete Menu...",
-        success: "Berhasil menghapus Menu",
-        error: "Gagal menghapus Menu",
-      }
-    );
+    setLoadingDelete(true);
+    const response = await fetchApi(`/menu/${idMenu}`, "DELETE");
 
+    if (response.status !== 200) toast.error("Gagal menghapus Menu");
+    else toast.success("Berhasil menghapus Menu");
+    setLoadingDelete(false);
     modal.onClose();
     window.location.reload();
   };
@@ -76,6 +74,7 @@ export default function TableMenu() {
         onOpenChange={modal.onOpenChange}
         btnActionTitle="Delete"
         title="Delete Menu"
+        loading={loadingDelete}
         submit={handleDeleteSubmit}
       >
         <h1>Are you sure want to delete this menu?</h1>
