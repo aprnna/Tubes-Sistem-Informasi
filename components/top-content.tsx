@@ -4,7 +4,14 @@ import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { redirect } from "next/navigation";
 import fetchApi from "@/utils/fetchApi";
-
+import {
+  BreadcrumbItem,
+  Breadcrumbs,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from "@nextui-org/react";
 const TopContent = (): JSX.Element => {
   const pathname = usePathname();
   const [data, setData] = useState({ nama: "", role: "" });
@@ -16,7 +23,15 @@ const TopContent = (): JSX.Element => {
     "/pesanan": "Pesanan",
     "/pesanan/add": "Menu",
     "/pesanan/ongoing": "Pesanan Diproses",
+    "/bahan_baku": "Bahan Baku",
+    "/bahan_baku/riwayat": "Riwayat Bahan Baku",
   };
+
+  async function logout() {
+    const response = await fetchApi("/auth/logout", "POST").then(() =>
+      redirect("/auth/login")
+    );
+  }
 
   async function getUser() {
     const { data } = await fetchApi("/auth/current-user", "GET");
@@ -34,14 +49,44 @@ const TopContent = (): JSX.Element => {
   return (
     <div className="flex bg-amber-950 text-red-100 justify-between items-center py-2 px-8 ">
       <div className="flex gap-5 items-center">
-        <button className="bg-orange-900 p-2 rounded-lg hover:bg-orange-600 transition-all duration-300">
+        {/* <button className="bg-orange-900 p-2 rounded-lg hover:bg-orange-600 transition-all duration-300">
           <img alt="" src="../arrow-left.svg" />
-        </button>
-        <h1 className="text-lg">{currentTitle}</h1>
+        </button> */}
+        <Breadcrumbs
+          itemClasses={{
+            separator: "text-white",
+          }}
+        >
+          {pathname == "/bahan_baku/riwayat" && (
+            <BreadcrumbItem href="/bahan_baku">
+              <h1 className="text-lg text-foreground-200">Bahan Baku</h1>
+            </BreadcrumbItem>
+          )}
+          <BreadcrumbItem href={pathname}>
+            <h1 className="text-lg text-white">{currentTitle}</h1>
+          </BreadcrumbItem>
+        </Breadcrumbs>
       </div>
       <div className="flex gap-4 items-center">
-        <img alt="profile.png" className="max-h-12" src="../profile.png" />
-        <div className="text-lg">
+        <Dropdown placement="bottom-end">
+          <DropdownTrigger>
+            <img
+              alt="profile.png"
+              className="max-h-12 hover:brightness-90 hover:cursor-pointer"
+              src="../profile.png"
+            />
+          </DropdownTrigger>
+          <DropdownMenu aria-label="Profile Actions" variant="flat">
+            <DropdownItem key="logout" color="danger">
+              <form method="POST" action="/api/auth/logout">
+                <button type="submit" className="w-full text-left">
+                  Log Out
+                </button>
+              </form>
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+        <div className="text-md py-2">
           <p className="text-red-300 font-bold">
             {loading ? "Role" : data?.role}
           </p>

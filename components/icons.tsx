@@ -90,7 +90,7 @@ export const GithubIcon: React.FC<IconSvgProps> = ({
 };
 
 export const MenuIcon: React.FC<IconSvgProps> = ({
-  size = 35,
+  size = 30,
   width,
   height,
   ...props
@@ -113,7 +113,7 @@ export const MenuIcon: React.FC<IconSvgProps> = ({
 };
 
 export const OrdersIcon: React.FC<IconSvgProps> = ({
-  size = 35,
+  size = 30,
   width,
   height,
   ...props
@@ -159,7 +159,7 @@ export const BackIcon: React.FC<IconSvgProps> = ({
 };
 
 export const ManageMenu: React.FC<IconSvgProps> = ({
-  size = 35,
+  size = 30,
   width,
   height,
   ...props
@@ -182,7 +182,7 @@ export const ManageMenu: React.FC<IconSvgProps> = ({
 };
 
 export const OngoingOrders: React.FC<IconSvgProps> = ({
-  size = 39,
+  size = 32,
   width,
   height,
   ...props
@@ -205,7 +205,7 @@ export const OngoingOrders: React.FC<IconSvgProps> = ({
 };
 
 export const StorageIcon: React.FC<IconSvgProps> = ({
-  size = 35,
+  size = 30,
   width,
   height,
   ...props
@@ -228,7 +228,7 @@ export const StorageIcon: React.FC<IconSvgProps> = ({
 };
 
 export const Laporan: React.FC<IconSvgProps> = ({
-  size = 44,
+  size = 35,
   width,
   height,
   ...props
@@ -249,8 +249,6 @@ export const Laporan: React.FC<IconSvgProps> = ({
     </svg>
   );
 };
-
-
 
 export const MoonFilledIcon = ({
   size = 24,

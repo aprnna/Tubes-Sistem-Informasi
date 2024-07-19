@@ -42,7 +42,7 @@ const Sidebar = () => {
       return item.href === "/pesanan/add" || item.href === "/pesanan";
     } else if (pathname === "/pesanan/ongoing") {
       return item.href === "/menu" || item.href === "/pesanan/ongoing";
-    } else if (pathname.startsWith("/bahan_baku")) {
+    } else if (pathname == "/bahan_baku") {
       return item.href === "/bahan_baku";
     }
 
