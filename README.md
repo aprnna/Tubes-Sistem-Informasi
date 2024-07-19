@@ -71,7 +71,7 @@ Licensed under the [MIT license](https://github.com/nextui-org/next-app-template
 
 - design pesanan diproses ✅
 - design detail pesanan diproses ✅
-- design crud menu ❌
+- design crud menu ✅
 - design table menu ✅
 - batasan tampilan sidebar ✅
 
@@ -101,7 +101,7 @@ Licensed under the [MIT license](https://github.com/nextui-org/next-app-template
 - update status menjadi selesai ✅
 - get pesanan ongoing ✅
 - post menu ✅
-- update menu ❌
+- update menu ✅
 - update ketersediaan menu ✅
 - hak akses ✅
 
