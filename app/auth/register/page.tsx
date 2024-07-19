@@ -3,6 +3,7 @@ import { Input } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
 import { Select, SelectItem } from "@nextui-org/select";
 import fetchApi from "@/utils/fetchApi";
+import { toast } from "react-toastify";
 
 export default function RegisterPage() {
   const roles = [
@@ -34,11 +35,9 @@ export default function RegisterPage() {
 
     const { data: dataUser } = await fetchApi("/auth/register", "POST", data);
 
-    if (dataUser.status == 400) return alert("GAGAL REGISTER");
+    if (dataUser.status == 400) return toast.error("GAGAL REGISTER");
 
-    return alert("BERHASIL REGISTER");
-
-    // return alert("BERHASIL REGISTER");
+    return toast.success("BERHASIL REGISTER");
   }
 
   return (

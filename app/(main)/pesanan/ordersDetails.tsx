@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Modal from "@/components/modal";
 import fetchApi from "@/utils/fetchApi";
 import { formatCurrency } from "@/utils/formatCurrency";
+import { toast } from "react-toastify";
 interface userData {
   id: number;
 }
@@ -97,7 +98,7 @@ export const OrderDetails = (): JSX.Element => {
     setNoMeja(1);
     emptyCart(cart);
     getLastId();
-    alert("Cetak Nota Berhasil");
+    toast.success("Pesanan Berhasil Dibuat");
   }
 
   useEffect(() => {

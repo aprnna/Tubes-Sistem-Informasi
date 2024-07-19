@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import fetchApi from "@/utils/fetchApi";
 import { formatCurrency } from "@/utils/formatCurrency";
+import { toast } from "react-toastify";
 
 interface MenuItem {
   id: number;
@@ -61,14 +62,14 @@ export default function OrderCards() {
     });
 
     if (error) {
-      alert("Failed to update order status");
+      toast.error("Failed to update order status");
 
       return;
     }
     getOrders();
     setOrderData(null);
     setDetailsLoading(false);
-    alert("Order status updated successfully");
+    toast.success("Order status updated successfully");
   }
 
   useEffect(() => {

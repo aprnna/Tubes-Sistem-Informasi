@@ -5,6 +5,7 @@ import { type User } from "@supabase/supabase-js";
 import { createClient } from "@/utils/supabase/client";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
+import { toast } from "react-toastify";
 
 export default function AccountForm({ user }: { user: User | null }) {
   const supabase = createClient();
@@ -34,7 +35,7 @@ export default function AccountForm({ user }: { user: User | null }) {
         setRole(data.role);
       }
     } catch (error) {
-      alert("Error loading user data!");
+      toast.error("Error loading user data!");
     } finally {
       setLoading(false);
     }
@@ -62,9 +63,9 @@ export default function AccountForm({ user }: { user: User | null }) {
       });
 
       if (error) throw error;
-      alert("Profile updated!");
+      toast.success("Profile updated!");
     } catch (error) {
-      alert("Error updating the data!");
+      toast.error("Error updating the data!");
     } finally {
       setLoading(false);
     }

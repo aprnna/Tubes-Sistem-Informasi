@@ -22,7 +22,6 @@ export async function POST(req: NextRequest) {
   if (errorDataUser) {
     redirect('/error')
   }
-  console.log(dataUser)
   getResponse(dataUser, 'success login', 200)
   switch (dataUser.role) {
     case 'manager':
