@@ -6,12 +6,30 @@ import { Loading } from "@/components/loading";
 import { toast } from "react-toastify";
 import Modal from "@/components/modal2";
 import { useDisclosure } from "@nextui-org/modal";
+import FormMenu from "./formMenu";
+
+interface EditData {
+  id: number;
+  nama: string;
+  harga: number;
+  kategori: string;
+  foto?: File;
+}
+
 export default function TableMenu() {
   const [menu, setMenu] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadingDelete, setLoadingDelete] = useState(false);
+  const [loadingUpdate, setLoadingUpdate] = useState(false);
   const modal = useDisclosure();
+  const modalUpdate = useDisclosure();
   const [idMenu, setIdMenu] = useState(0);
+  const [editData, setEditData] = useState<EditData>({
+    id: 0,
+    nama: "",
+    harga: 0,
+    kategori: "",
+  });
 
   async function getMenu() {
     setLoading(true);
@@ -24,6 +42,28 @@ export default function TableMenu() {
   const handleEdit = (id: number) => {
     console.log("Edit item with id:", id);
     // Tambahkan logika untuk mengedit item
+    const data = menu.find((item: any) => item.id === id);
+
+    if (data) setEditData(data);
+    modalUpdate.onOpen();
+  };
+
+  const handleEditSubmit = async (e: any) => {
+    e.preventDefault();
+    setLoadingUpdate(true);
+    const formData = new FormData(e.target);
+
+    formData.append("oldFoto", editData.foto as any);
+    const response = await fetch(`/api/menu/${editData.id}`, {
+      method: "PUT",
+      body: formData,
+    });
+
+    if (!response.ok) toast.error("Gagal menambahkan Menu");
+    else toast.success("Berhasil menambahkan Menu");
+    setLoadingUpdate(false);
+    modalUpdate.onClose();
+    window.location.reload();
   };
 
   const handleDelete = async (id: number) => {
@@ -69,6 +109,17 @@ export default function TableMenu() {
           onEdit={handleEdit}
         />
       )}
+      <Modal
+        btnActionTitle="Edit Menu"
+        isOpen={modalUpdate.isOpen}
+        loading={loadingUpdate}
+        submit={handleEditSubmit}
+        title="Edit Menu"
+        onOpenChange={modalUpdate.onOpenChange}
+        sizeModal="xl"
+      >
+        <FormMenu initialData={editData} />
+      </Modal>
       <Modal
         isOpen={modal.isOpen}
         onOpenChange={modal.onOpenChange}

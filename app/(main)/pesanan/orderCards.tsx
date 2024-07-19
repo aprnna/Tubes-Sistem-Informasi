@@ -20,7 +20,7 @@ interface Order {
   id: number;
   atasNama: string;
   banyak_orang: number;
-  created_at: string;
+  createdAt: string;
   id_users: string;
 }
 
@@ -206,7 +206,7 @@ export default function OrderCards() {
                       className="text-end bg-white font-medium "
                       type="timestamp"
                       value={formatToDateTimeLocal(
-                        orderData.order[0].created_at
+                        orderData.order[0].createdAt
                       )}
                     />
                   </div>
@@ -216,7 +216,7 @@ export default function OrderCards() {
                       disabled
                       className="text-end bg-white font-medium w-full"
                       type="text"
-                      value={orderData.order[0].id_users}
+                      value={orderData.order[0].id_users.split("-")[0]}
                     />
                   </div>
                 </div>

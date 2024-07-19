@@ -1,6 +1,6 @@
 import getResponse from '@/utils/getResponse'
 import { createClient } from '@/utils/supabase/server'
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest } from 'next/server'
 export async function GET() {
   const supabase = createClient()
   const { data: menu } = await supabase.from('menu').select()
@@ -11,8 +11,11 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   const supabase = createClient()
   const data = await req.formData()
-  const { data:dataUpload, error:errUpload } = await supabase.storage.from('menu').upload(`${data.get("nama")}`, data.get('foto') as File)
+  const randomId = Math.floor(Math.random() * 1000)
   
+  if (!data.get('foto')) return getResponse(null, 'Image is required', 400)
+  const { data:dataUpload, error:errUpload } = await supabase.storage.from('menu').upload(`${data.get("nama")} ${randomId}`, data.get('foto') as File)
+
   if (errUpload) {
     await supabase.storage.from('menu').remove([`${(dataUpload as any)?.path}`])
     

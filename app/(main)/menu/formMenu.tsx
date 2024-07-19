@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Input } from "@nextui-org/input";
 import { Select, SelectItem } from "@nextui-org/select";
 export default function FormMenu({ initialData }: { initialData?: any }) {
-  let { nama, jumlah, kategori } = initialData || {};
+  let { nama, harga, kategori } = initialData || {};
   const [data, setData] = useState({
     nama: nama || "",
-    harga: jumlah || "",
+    harga: harga || "",
     kategori: kategori || "",
   });
   const KategoriList = [
@@ -16,6 +16,18 @@ export default function FormMenu({ initialData }: { initialData?: any }) {
     {
       key: "minuman",
       label: "Minuman",
+    },
+    {
+      key: "cemilan",
+      label: "Cemilan",
+    },
+    {
+      key: "hidangan_utama",
+      label: "Hidangan Utama",
+    },
+    {
+      key: "pencuci_mulut",
+      label: "Pencuci Mulut",
     },
   ];
 
@@ -37,8 +49,9 @@ export default function FormMenu({ initialData }: { initialData?: any }) {
         labelPlacement="outside"
         name="harga"
         value={data.harga}
+        type="number"
         onChange={(e) => setData({ ...data, harga: e.target.value })}
-        placeholder="Jumlah"
+        placeholder="harga"
         size="lg"
       />
       <Select
@@ -58,7 +71,7 @@ export default function FormMenu({ initialData }: { initialData?: any }) {
       </Select>
       <label>
         <p>Foto</p>
-        <input required name="foto" type="file" />
+        <input name="foto" type="file" />
       </label>
     </>
   );

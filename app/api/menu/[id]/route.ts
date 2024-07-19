@@ -10,7 +10,8 @@ export async function PUT(req:NextRequest,{params}:any) {
   let newImg = null
 
   if (newDataImg.size > 0) {
-    const { data:dataUpload, error:errUpload } = await supabase.storage.from('menu').upload(`${data.get("nama")}`, data.get('foto') as File)
+    const randomId = Math.floor(Math.random() * 1000)
+    const { data:dataUpload, error:errUpload } = await supabase.storage.from('menu').upload(`${data.get("nama")} ${randomId}`, data.get('foto') as File)
     
     if (errUpload) return getResponse(errUpload, 'Failed to upload image', 400)
     const { data:dataImg } = await supabase.storage.from('menu').getPublicUrl(`${dataUpload.path}`)
@@ -20,9 +21,7 @@ export async function PUT(req:NextRequest,{params}:any) {
   const { data:updateData, error } = await supabase.from("menu").update({
     nama:data.get('nama') as string,
     harga:data.get('harga'),
-    deskripsi:data.get('deskripsi'),
     kategori:data.get('kategori'),
-    status:data.get('status'),
     foto:newImg?newImg:data.get('oldFoto')
   }).eq('id',id).select()
 
@@ -45,7 +44,7 @@ export async function DELETE(req:NextRequest,{params}:any) {
   const supabase = createClient()
   const {id} = params
   const {data, error} = await supabase.from('menu').delete().eq('id',id)
-  console.log(data)
+  
   if (error) return getResponse(error,"Failed delete menu",400)
 
   return getResponse(data, "Success Delete Menu",200)

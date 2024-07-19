@@ -29,10 +29,10 @@ export async function POST(req: NextRequest) {
       redirect('/admin')
       break;
     case 'kasir':
-      redirect ('/pesanan')
+      redirect ('/pesanan/add')
       break;
     case 'koki':
-      redirect('/menu')
+      redirect('/pesanan/ongoing')
       break;
     case 'karyawan':
       redirect('/bahan_baku')
