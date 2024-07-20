@@ -56,9 +56,10 @@ export const OrderDetails = (): JSX.Element => {
 
   async function getLastId() {
     const { data } = await fetchApi("/pesanan/last", "GET");
-    const newOrderId = data
-      ? `NT${String(data[0].id + 1).padStart(6, "0")}`
-      : "NT000001";
+    const newOrderId =
+      data.length > 0
+        ? `NT${String(data[0].id + 1).padStart(6, "0")}`
+        : "NT000001";
 
     setLastID(newOrderId);
   }

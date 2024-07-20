@@ -10,6 +10,10 @@ export const Button = extendVariants(But, {
       violet: "bg-[#8b5cf6] text-[#fff]",
       primary: "bg-amber-900 text-slate-50 hover:bg-amber-950",
     },
+    variant: {
+      outline:
+        "border border-amber-950 text-[#000] hover:bg-amber-950/50 hover:text-[#fff] bg-transparent",
+    },
     isDisabled: {
       true: "bg-[#eaeaea] text-[#000] opacity-50 cursor-not-allowed",
     },

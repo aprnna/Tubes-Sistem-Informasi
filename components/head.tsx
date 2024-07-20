@@ -20,6 +20,8 @@ export default function Head({ children }: HeadProps) {
     "/pesanan/ongoing": "Pesanan Diproses",
     "/bahan_baku": "Bahan Baku",
     "/bahan_baku/riwayat": "Riwayat Bahan Baku",
+    "/admin": "Laporan",
+    "/admin/karyawan": "Kelola Karyawan",
   };
 
   const currentTitle = pathTitles[pathname] || "Menu";

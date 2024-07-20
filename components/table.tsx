@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import ToggleSwitch from "@/components/toggleSwitch";
 import fetchApi from "@/utils/fetchApi";
 import { toast } from "react-toastify";
+import { formatCurrency } from "@/utils/formatCurrency";
 interface Column {
   key: string;
   label: string;
@@ -133,6 +134,8 @@ const Table: React.FC<TableProps> = ({ columns, data, onEdit, onDelete }) => {
                     formatID(row[column.key])
                   ) : column.key === "createdAt" ? (
                     formatToDateTimeLocal(row[column.key])
+                  ) : column.key === "total_harga" ? (
+                    formatCurrency(row[column.key])
                   ) : column.key === "tersedia" ? (
                     <ToggleSwitch
                       initialChecked={statuses[rowIndex]}

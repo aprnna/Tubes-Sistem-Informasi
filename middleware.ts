@@ -25,7 +25,7 @@ export async function middleware(req: NextRequest) {
 
   if (error) console.error(error)
   const roleAccess: { [key: string]: string[] } = {
-    manager: ['/admin'],
+    manager: ['/admin','/admin/karyawan'],
     kasir: ['/pesanan/add', '/pesanan'],
     koki: ['/menu','/pesanan/ongoing'],
     karyawan: ['/bahan_baku','/bahan_baku/riwayat'],

@@ -9,6 +9,7 @@ import {
   OngoingOrders,
   StorageIcon,
   Laporan,
+  ManageKaryawan,
 } from "@/components/icons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -32,7 +33,12 @@ const Sidebar = () => {
     },
     { icon: <ManageMenu />, text: "Manajemen Menu", href: "/menu" },
     { icon: <StorageIcon />, text: "Bahan Baku", href: "/bahan_baku" },
-    { icon: <Laporan />, text: "Laporan", href: "/" },
+    { icon: <Laporan />, text: "Laporan", href: "/admin" },
+    {
+      icon: <ManageKaryawan />,
+      text: "Kelola Karyawan",
+      href: "/admin/karyawan",
+    },
   ];
 
   const filteredMenuItems = menuItems.filter((item) => {
@@ -44,6 +50,8 @@ const Sidebar = () => {
       return item.href === "/menu" || item.href === "/pesanan/ongoing";
     } else if (pathname.startsWith("/bahan_baku")) {
       return item.href === "/bahan_baku";
+    } else if (pathname.startsWith("/admin")) {
+      return item.href === "/admin" || item.href === "/admin/karyawan";
     }
 
     return true;

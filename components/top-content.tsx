@@ -25,6 +25,8 @@ const TopContent = (): JSX.Element => {
     "/pesanan/ongoing": "Pesanan Diproses",
     "/bahan_baku": "Bahan Baku",
     "/bahan_baku/riwayat": "Riwayat Bahan Baku",
+    "/admin": "Laporan",
+    "/admin/karyawan": "Kelola Karyawan",
   };
 
   async function logout() {

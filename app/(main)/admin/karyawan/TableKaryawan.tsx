@@ -5,43 +5,45 @@ import Table from "@/components/table";
 import { Loading } from "@/components/loading";
 import { toast } from "react-toastify";
 import Modal from "@/components/modal2";
-import FormBahan from "./formBahan";
 import { useDisclosure } from "@nextui-org/modal";
+import FormKaryawan from "./formKaryawan";
 
 interface EditData {
   id: number;
   nama: string;
-  jumlah: number;
-  satuan: string;
+  umur: number;
+  no_telp: string;
+  role: string;
 }
 
-export default function TableBahan({ querySearch }: any) {
-  const [bahan, setBahan] = useState([]);
+export default function TableKaryawan({ querySearch }: any) {
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadingUpdate, setLoadingUpdate] = useState(false);
   const [loadingDelete, setLoadingDelete] = useState(false);
-  const [idBahan, setIdBahan] = useState(0);
+  const [idusers, setIdusers] = useState(0);
   const [editData, setEditData] = useState<EditData>({
     id: 0,
     nama: "",
-    jumlah: 0,
-    satuan: "",
+    umur: 0,
+    no_telp: "",
+    role: "",
   });
   const [searchData, setSearchData] = useState([]);
   const modal = useDisclosure();
   const modal2 = useDisclosure();
 
-  async function getBahan() {
+  async function getUsers() {
     setLoading(true);
-    const { data } = await fetchApi("/bahan", "GET");
+    const { data } = await fetchApi("/users", "GET");
 
-    setBahan(data);
+    setUsers(data);
     setLoading(false);
   }
 
   const handleEdit = async (id: number) => {
     console.log("Edit item with id:", id);
-    const data = bahan.find((item: any) => item.id === id);
+    const data = users.find((item: any) => item.id === id);
 
     if (data) setEditData(data);
     modal.onOpen();
@@ -53,38 +55,43 @@ export default function TableBahan({ querySearch }: any) {
     const formData = new FormData(e.target);
     const dataUpdate = {
       nama: formData.get("nama"),
-      jumlah: formData.get("jumlah"),
-      satuan: formData.get("satuan"),
+      umur: formData.get("umur"),
+      no_telp: formData.get("no_telp"),
+      role: formData.get("role"),
     };
-    const response = await fetchApi(`/bahan/${editData.id}`, "PUT", dataUpdate);
+    const response = await fetchApi(`/users/${editData.id}`, "PUT", dataUpdate);
 
-    if (response.status == 200) toast.success("Berhasil mengedit bahan baku");
-    else toast.error("Gagal mengedit bahan baku");
     setLoadingUpdate(false);
+    modal.onClose();
+    if (response.status !== 200) {
+      return toast.error("Gagal mengedit users baku");
+    }
+    toast.success("Berhasil mengedit users baku");
     window.location.reload();
   };
   const handleDelete = async (id: number) => {
     console.log("Delete item with id:", id);
-    setIdBahan(id);
+    setIdusers(id);
     modal2.onOpen();
   };
   const handleDeleteSubmit = async () => {
     setLoadingDelete(true);
-    const response = await fetchApi(`/bahan/${idBahan}`, "DELETE");
+    const response = await fetchApi(`/users/${idusers}`, "DELETE");
 
-    if (response.status !== 200) toast.error("Gagal menghapus Bahan");
-    else toast.success("Berhasil menghapus Bahan");
     modal2.onClose();
     setLoadingDelete(false);
+
+    if (response.status !== 200) return toast.error("Gagal menghapus users");
+    toast.success("Berhasil menghapus users");
     window.location.reload();
   };
 
   useEffect(() => {
-    getBahan();
+    getUsers();
   }, []);
 
   useEffect(() => {
-    const filteredData = bahan.filter((item: any) =>
+    const filteredData = users.filter((item: any) =>
       item.nama.toLowerCase().includes(querySearch.toLowerCase())
     );
 
@@ -92,9 +99,11 @@ export default function TableBahan({ querySearch }: any) {
   }, [querySearch]);
 
   const columns = [
-    { key: "nama", label: "Nama Bahan" },
-    { key: "jumlah", label: "Jumlah" },
-    { key: "satuan", label: "Satuan" },
+    { key: "nama", label: "Nama karyawan" },
+    { key: "umur", label: "Umur" },
+    { key: "no_telp", label: "Nomor Telp" },
+    { key: "role", label: "Jabatan" },
+    { key: "createdAt", label: "Tanggal" },
     { key: "action", label: "Action" },
   ];
 
@@ -107,20 +116,20 @@ export default function TableBahan({ querySearch }: any) {
         <>
           <Table
             columns={columns}
-            data={querySearch == "" ? bahan : searchData}
+            data={querySearch == "" ? users : searchData}
             onDelete={handleDelete}
             onEdit={handleEdit}
           />
           <Modal
-            btnActionTitle="Edit Bahan Baku"
+            btnActionTitle="Edit Karyawan"
             isOpen={modal.isOpen}
             loading={loadingUpdate}
             submit={handleEditSubmit}
-            title="Edit Bahan Baku"
+            title="Edit Karyawan"
             onOpenChange={modal.onOpenChange}
             sizeModal="xl"
           >
-            <FormBahan initialData={editData} />
+            <FormKaryawan initialData={editData} isEdit={true} />
           </Modal>
           <Modal
             isOpen={modal2.isOpen}

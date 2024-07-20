@@ -1,13 +1,15 @@
+import Sidebar from "@/components/sidebar";
 export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      <div className="inline-block max-w-lg text-center justify-center">
+    <>
+      <section className="w-full h-auto flex items-center justify-center bg-slate-900">
+        <Sidebar />
         {children}
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

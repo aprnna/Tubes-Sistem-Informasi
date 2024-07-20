@@ -28,7 +28,7 @@ export async function GET(req:NextRequest,{params}:any) {
 
     const { data: updatedOrder, error: updateError } = await supabase
         .from('pesanan')
-        .update({ atasNama, banyak_orang,no_meja, status, total_harga, id_users})
+        .update({ atasNama, banyak_orang,no_meja, status, total_harga, id_users, updatedAt: new Date().toISOString() })
         .eq('id', id);
 
     if (updateError) return getResponse(updateError, "Failed to update order", 400);
