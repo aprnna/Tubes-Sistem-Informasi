@@ -112,7 +112,7 @@ export default function TableBahan({ querySearch }: any) {
             onEdit={handleEdit}
           />
           <Modal
-            btnActionTitle="Edit Bahan Baku"
+            btnActionTitle="Simpan"
             isOpen={modal.isOpen}
             loading={loadingUpdate}
             submit={handleEditSubmit}
@@ -126,11 +126,11 @@ export default function TableBahan({ querySearch }: any) {
             isOpen={modal2.isOpen}
             onOpenChange={modal2.onOpenChange}
             btnActionTitle="Delete"
-            title="Delete Menu"
+            title="Delete Bahan Baku"
             loading={loadingDelete}
             submit={handleDeleteSubmit}
           >
-            <h1>Are you sure want to delete this menu?</h1>
+            <h1>Apakah kamu yakin untuk menghapus ini?</h1>
           </Modal>
         </>
       )}
